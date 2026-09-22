@@ -1,22 +1,43 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { BRAND_CONFIG } from '../../data/brand';
-import heroBannerImg from '../../assets/home/hero_banner.jpg';
+
+const HERO_VIDEO_PATH = '/videos/Fashion_brand_creating_luxury_co\u2026_20260922173139.mp4';
 
 export const Hero: React.FC = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.defaultMuted = true;
+      videoRef.current.muted = true;
+      videoRef.current.play().catch(() => {
+        // Autoplay fallback handling
+      });
+    }
+  }, []);
+
   return (
     <section className="relative min-h-[88vh] sm:min-h-[92vh] flex items-center justify-center overflow-hidden pt-20 pb-12 bg-[#08080a]">
-      {/* Background High-Fashion Hero Visual */}
-      <div className="absolute inset-0 z-0">
-        <img
-          src={heroBannerImg}
-          alt="Thireeshaw Designers Bridal Couture"
-          className="w-full h-full object-cover object-[center_28%] filter brightness-[0.40] contrast-[1.08] scale-105"
-        />
-        {/* Cinematic dark gradients */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#08080a] via-[#08080a]/60 to-[#08080a]/75" />
+      {/* Background Cinematic Hero Video */}
+      <div className="absolute inset-0 z-0 overflow-hidden bg-[#08080a]">
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none select-none filter brightness-[0.75] contrast-[1.05]"
+        >
+          <source src={HERO_VIDEO_PATH} type="video/mp4" />
+        </video>
+
+        {/* Cinematic dark gradients for maximum typography readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#08080a]/75 via-[#08080a]/55 to-[#08080a] pointer-events-none" />
+        <div className="absolute inset-0 bg-radial from-transparent via-[#08080a]/30 to-[#08080a]/80 pointer-events-none" />
       </div>
 
       {/* Content Container */}

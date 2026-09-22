@@ -1,0 +1,163 @@
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { Search, Heart, ShoppingBag, Menu } from 'lucide-react';
+import { useCart } from '../../context/CartContext';
+import { useWishlist } from '../../context/WishlistContext';
+import { BRAND_CONFIG } from '../../data/brand';
+
+interface NavbarProps {
+  onOpenSearch: () => void;
+  onOpenMobileMenu: () => void;
+}
+
+const NAV_LINKS = [
+  { name: 'HOME', path: '/' },
+  { name: 'SHOP', path: '/shop' },
+  { name: 'SAREES', path: '/category/sarees' },
+  { name: 'SALWAR', path: '/category/salwar' },
+  { name: 'GAGRA', path: '/category/gagra' },
+  { name: 'BRIDAL', path: '/category/bridal' },
+  { name: 'BLOUSES', path: '/category/blouses' },
+  { name: 'CUSTOM BLOUSE', path: '/custom-blouse', highlight: true },
+  { name: 'ABOUT', path: '/about' },
+  { name: 'CONTACT', path: '/contact' }
+];
+
+export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch, onOpenMobileMenu }) => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const { openCart, itemCount } = useCart();
+  const { wishlistCount } = useWishlist();
+  const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const isActive = (path: string) => {
+    if (path === '/') return location.pathname === '/';
+    return location.pathname.startsWith(path);
+  };
+
+  return (
+    <header
+      className={`fixed top-0 left-0 right-0 w-full z-40 transition-all duration-300 ${
+        isScrolled
+          ? 'py-2.5 bg-[#08080a]/92 backdrop-blur-xl border-b border-white/10 shadow-2xl shadow-black/70'
+          : 'py-3.5 bg-gradient-to-b from-black/90 via-black/50 to-transparent border-b border-white/5'
+      }`}
+      style={{ width: '100vw' }}
+    >
+      {/* Full-width container with generous padding */}
+      <div className="w-full px-4 sm:px-6 md:px-8 xl:px-12">
+        <div className="flex items-center justify-between gap-4">
+          {/* Mobile Left: Menu Hamburger */}
+          <div className="flex items-center lg:hidden">
+            <button
+              onClick={onOpenMobileMenu}
+              className="p-2 -ml-2 text-gray-300 hover:text-white rounded-lg hover:bg-white/10 transition-colors"
+              aria-label="Open mobile navigation"
+            >
+              <Menu className="w-5 h-5" />
+            </button>
+          </div>
+
+          {/* Left Brand: Uploaded Logo + Compact Wordmark */}
+          <Link to="/" className="flex items-center gap-2.5 sm:gap-3 shrink-0 group">
+            {/* Logo Image */}
+            <div className="relative flex items-center justify-center">
+              <img
+                src={BRAND_CONFIG.logoUrl}
+                alt="Thireeshaw Designers Logo"
+                className="h-9 sm:h-10 md:h-11 w-auto max-w-[46px] object-contain transition-transform duration-300 group-hover:scale-105"
+              />
+            </div>
+
+            {/* Compact Brand Typography */}
+            <div className="flex flex-col">
+              <div className="flex items-center gap-1">
+                <span className="font-serif text-sm sm:text-base font-medium tracking-[0.16em] text-white uppercase group-hover:text-[#fbbf24] transition-colors">
+                  THIREESHAW
+                </span>
+                <span className="font-serif text-sm sm:text-base font-light tracking-[0.16em] text-[#ff2a85] uppercase">
+                  DESIGNERS
+                </span>
+              </div>
+              <span className="text-[8px] sm:text-[9px] tracking-[0.22em] text-gray-400 uppercase font-sans font-medium">
+                {BRAND_CONFIG.tagline}
+              </span>
+            </div>
+          </Link>
+
+          {/* Center Navigation Links (Desktop) */}
+          <nav className="hidden lg:flex items-center justify-center gap-3 xl:gap-5 2xl:gap-6 flex-1 px-2">
+            {NAV_LINKS.map((link) => {
+              const active = isActive(link.path);
+              return (
+                <Link
+                  key={link.name}
+                  to={link.path}
+                  className={`relative text-[11px] xl:text-xs tracking-[0.14em] font-medium transition-colors py-1 whitespace-nowrap ${
+                    active
+                      ? 'text-white font-semibold'
+                      : link.highlight
+                      ? 'text-[#fbbf24] hover:text-[#fde047]'
+                      : 'text-gray-300 hover:text-white'
+                  }`}
+                >
+                  <span>{link.name}</span>
+                  {active && (
+                    <span className="absolute -bottom-1 inset-x-0 h-[2px] bg-[#ff2a85] rounded-full shadow-sm shadow-[#ff2a85]" />
+                  )}
+                </Link>
+              );
+            })}
+          </nav>
+
+          {/* Right Action Icons: Search, Wishlist, Cart */}
+          <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+            {/* Search */}
+            <button
+              onClick={onOpenSearch}
+              className="p-2 text-gray-300 hover:text-white rounded-lg hover:bg-white/10 transition-colors"
+              aria-label="Open search"
+            >
+              <Search className="w-5 h-5" />
+            </button>
+
+            {/* Wishlist */}
+            <Link
+              to="/wishlist"
+              className="relative p-2 text-gray-300 hover:text-[#ff62a6] rounded-lg hover:bg-white/10 transition-colors"
+              aria-label={`Wishlist (${wishlistCount} items)`}
+            >
+              <Heart className="w-5 h-5" />
+              {wishlistCount > 0 && (
+                <span className="absolute top-1 right-1 min-w-[17px] h-[17px] px-1 bg-[#ff2a85] text-white text-[10px] font-bold rounded-full flex items-center justify-center border-2 border-[#08080a]">
+                  {wishlistCount}
+                </span>
+              )}
+            </Link>
+
+            {/* Shopping Bag */}
+            <button
+              onClick={openCart}
+              className="relative p-2 text-gray-300 hover:text-[#fbbf24] rounded-lg hover:bg-white/10 transition-colors"
+              aria-label={`Shopping bag (${itemCount} items)`}
+            >
+              <ShoppingBag className="w-5 h-5" />
+              {itemCount > 0 && (
+                <span className="absolute top-1 right-1 min-w-[17px] h-[17px] px-1 bg-[#fbbf24] text-black text-[10px] font-bold rounded-full flex items-center justify-center border-2 border-[#08080a]">
+                  {itemCount}
+                </span>
+              )}
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+};

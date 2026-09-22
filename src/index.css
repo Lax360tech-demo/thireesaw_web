@@ -1,0 +1,108 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-cinzel: 'Cinzel', serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  
+  --color-brand-black: #08080a;
+  --color-brand-charcoal: #111115;
+  --color-brand-graphite: #181820;
+  --color-brand-card: #131318;
+  --color-brand-card-hover: #1b1b22;
+  --color-brand-border: #23232e;
+  --color-brand-border-light: #323242;
+  
+  --color-brand-pink: #ff2a85;
+  --color-brand-pink-light: #ff62a6;
+  --color-brand-pink-dark: #cc1263;
+  --color-brand-pink-glow: rgba(255, 42, 133, 0.18);
+  
+  --color-brand-yellow: #fbbf24;
+  --color-brand-yellow-light: #fde047;
+  --color-brand-gold: #f59e0b;
+  --color-brand-yellow-glow: rgba(251, 191, 36, 0.16);
+}
+
+@layer base {
+  * {
+    border-color: #23232e;
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: #08080a;
+    color: #f3f4f6;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* Custom luxury scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #08080a;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #23232e;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #ff2a85;
+  }
+}
+
+/* Glass and glow utilities */
+.glass-panel {
+  background: rgba(17, 17, 21, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-dropdown {
+  background: rgba(19, 19, 24, 0.95);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pink-glow {
+  box-shadow: 0 0 25px rgba(255, 42, 133, 0.25);
+}
+
+.yellow-glow {
+  box-shadow: 0 0 25px rgba(251, 191, 36, 0.25);
+}
+
+/* Hide scrollbar on category filters/pills */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 32s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}

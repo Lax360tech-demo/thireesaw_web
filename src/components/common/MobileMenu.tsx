@@ -15,6 +15,7 @@ const MENU_ITEMS = [
   { name: 'Sarees', path: '/category/sarees', badge: 'Pure Silk' },
   { name: 'Salwar', path: '/category/salwar' },
   { name: 'Gagra', path: '/category/gagra', badge: 'Bridal' },
+  { name: 'Jewellery', path: '/category/jewellery', badge: 'New Edit' },
   { name: 'Bridal Edit', path: '/category/bridal', badge: 'Couture' },
   { name: 'Bridal Blouses', path: '/category/blouses', badge: 'Speciality' },
   { name: 'Custom Blouse Studio', path: '/custom-blouse', highlight: true },

@@ -3,6 +3,7 @@ import { Hero } from '../components/home/Hero';
 import { BrandTicker } from '../components/home/BrandTicker';
 import { CategoryCards } from '../components/home/CategoryCards';
 import { FeaturedCollection } from '../components/home/FeaturedCollection';
+import { JewelleryEditSection } from '../components/home/JewelleryEditSection';
 import { BridalBlouseFeature } from '../components/home/BridalBlouseFeature';
 import { EmbroideryStory } from '../components/home/EmbroideryStory';
 import { BridalEditSection } from '../components/home/BridalEditSection';
@@ -24,7 +25,10 @@ export const HomePage: React.FC = () => {
       {/* 4. Featured Collection (THE EDIT) */}
       <FeaturedCollection />
 
-      {/* 5. Bridal Blouse Hallmark Feature */}
+      {/* 5. The Jewellery Edit */}
+      <JewelleryEditSection />
+
+      {/* 6. Bridal Blouse Hallmark Feature */}
       <BridalBlouseFeature />
 
       {/* 6. Embroidery Craft Story */}

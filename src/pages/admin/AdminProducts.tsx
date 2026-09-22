@@ -206,18 +206,18 @@ export const AdminProducts: React.FC = () => {
             Products Catalog Management
           </h2>
           <p className="text-xs text-gray-400">
-            Create, edit, or remove products across Sarees, Salwar, Gagra, and Blouse collections.
+            Create, edit, or remove products across Sarees, Salwar, Gagra, Jewellery, and Blouse collections.
           </p>
         </div>
 
         <div className="flex items-center gap-2.5">
           <button
             onClick={handleResetCatalog}
-            title="Reset to 20 Default Products"
+            title="Reset to 25 Default Products"
             className="px-3.5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-gray-300 transition-colors flex items-center gap-1.5 cursor-pointer"
           >
             <RefreshCw className="w-3.5 h-3.5 text-[#fbbf24]" />
-            <span>Reset 20 Defaults</span>
+            <span>Reset 25 Defaults</span>
           </button>
 
           <button
@@ -254,7 +254,7 @@ export const AdminProducts: React.FC = () => {
 
         {/* Category filters */}
         <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs">
-          {['all', 'sarees', 'salwar', 'gagra', 'blouses', 'bridal'].map((cat) => (
+          {['all', 'sarees', 'salwar', 'gagra', 'jewellery', 'blouses', 'bridal'].map((cat) => (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
@@ -446,6 +446,7 @@ export const AdminProducts: React.FC = () => {
                     <option value="sarees">Sarees</option>
                     <option value="salwar">Salwar</option>
                     <option value="gagra">Gagra</option>
+                    <option value="jewellery">Jewellery</option>
                     <option value="blouses">Blouses</option>
                   </select>
                 </div>

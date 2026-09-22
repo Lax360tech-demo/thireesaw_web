@@ -59,8 +59,12 @@ export const ShopPage: React.FC = () => {
   const filteredProducts = useMemo(() => {
     return PRODUCTS.filter((product) => {
       // Category filter
-      if (filters.category !== 'all' && product.category !== filters.category) {
-        return false;
+      if (filters.category !== 'all') {
+        if (filters.category === 'bridal') {
+          if (!product.isBridal) return false;
+        } else if (product.category !== filters.category) {
+          return false;
+        }
       }
 
       // Collection filter

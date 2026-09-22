@@ -1,4 +1,4 @@
-export type ProductCategory = 'sarees' | 'salwar' | 'gagra' | 'blouses' | 'bridal';
+export type ProductCategory = 'sarees' | 'salwar' | 'gagra' | 'blouses' | 'bridal' | 'jewellery';
 
 export type CraftType = 
   | 'Hand Embroidery'
@@ -6,7 +6,10 @@ export type CraftType =
   | 'Pattu Blouse Work'
   | 'Zardozi & Aari'
   | 'Zari Weave'
-  | 'Kundan & Cutwork';
+  | 'Kundan & Cutwork'
+  | 'Temple Jewellery Craft'
+  | 'Kundan Stone Setting'
+  | 'Antique Gold Polish';
 
 export type OccasionType = 'Wedding' | 'Reception' | 'Festive' | 'Party' | 'Casual';
 

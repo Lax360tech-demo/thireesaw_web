@@ -16,6 +16,7 @@ const NAV_LINKS = [
   { name: 'SAREES', path: '/category/sarees' },
   { name: 'SALWAR', path: '/category/salwar' },
   { name: 'GAGRA', path: '/category/gagra' },
+  { name: 'JEWELLERY', path: '/category/jewellery' },
   { name: 'BRIDAL', path: '/category/bridal' },
   { name: 'BLOUSES', path: '/category/blouses' },
   { name: 'CUSTOM BLOUSE', path: '/custom-blouse', highlight: true },

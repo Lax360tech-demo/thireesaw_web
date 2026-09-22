@@ -17,7 +17,7 @@ export const CategoryCards: React.FC = () => {
         subtitle="Designed for celebrations, crafted for you in our boutique atelier."
       />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
         {primaryCategories.map((cat, idx) => {
           // Dynamic accurate count
           const count = PRODUCTS.filter((p) => p.category === cat.id).length;

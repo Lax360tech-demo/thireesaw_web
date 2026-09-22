@@ -29,6 +29,13 @@ import kasavuTempleBlouseImg from '../assets/products/blouses/kasavu_temple_blou
 import coralCutworkBlouseImg from '../assets/products/blouses/coral_cutwork_blouse.jpg';
 import yellowBullionBlouseImg from '../assets/products/blouses/yellow_bullion_blouse.jpg';
 
+// Jewellery Local Assets (Unique Curated & Generated)
+import templeGoldNecklaceImg from '../assets/products/jewellery/temple_gold_necklace.jpg';
+import kundanBridalNecklaceImg from '../assets/products/jewellery/kundan_bridal_necklace.jpg';
+import lakshmiHaramImg from '../assets/products/jewellery/lakshmi_haram.jpg';
+import rubyEmeraldJhumkaImg from '../assets/products/jewellery/ruby_emerald_jhumka.jpg';
+import bridalBanglesImg from '../assets/products/jewellery/bridal_bangles.jpg';
+
 export const INITIAL_PRODUCTS: Product[] = [
   // ==================== 1. SAREES (5 Products) ====================
   {
@@ -698,6 +705,191 @@ export const INITIAL_PRODUCTS: Product[] = [
       'Salem boutique bespoke fit'
     ],
     careInstructions: ['Dry clean only']
+  },
+
+  // ==================== 5. JEWELLERY (5 Products) ====================
+  {
+    id: 'td-jwl-01',
+    name: 'Temple Gold Necklace Set',
+    category: 'jewellery',
+    subcategory: 'Necklaces',
+    price: 48500,
+    originalPrice: 58000,
+    discount: 16,
+    images: [templeGoldNecklaceImg],
+    colors: [
+      { name: 'Antique Matte Gold', hex: '#d4af37' },
+      { name: 'Kemp Ruby Accent', hex: '#991b1b' }
+    ],
+    sizes: ['Standard / Adjustable Dori'],
+    description: 'Traditional South Indian inspired temple jewellery necklace set with intricate divine motifs and rich gold detailing. Featuring Goddess Lakshmi motifs, delicate nakshi craftsmanship, and matching traditional jhumka earrings.',
+    shortDescription: 'South Indian temple gold necklace set with divine Lakshmi nakshi work.',
+    material: '22K Antique Matte Gold Plated Brass & Kemp Stones',
+    craftType: 'Temple Jewellery Craft',
+    occasion: 'Wedding',
+    isBridal: true,
+    isNew: true,
+    isFeatured: true,
+    inStock: true,
+    rating: 5.0,
+    reviewsCount: 38,
+    details: [
+      'Goddess Lakshmi centerpiece with floral nakshi detailing',
+      'Accompanied by matching hanging temple jhumkas',
+      'Adjustable pure zari braided dori for custom neckline length',
+      'Anti-tarnish protective lacquer coat'
+    ],
+    careInstructions: [
+      'Store in air-tight jewellery pouch',
+      'Keep away from water, perfumes, and hair sprays',
+      'Wipe with soft cotton cloth after use'
+    ]
+  },
+  {
+    id: 'td-jwl-02',
+    name: 'Kundan Bridal Necklace Set',
+    category: 'jewellery',
+    subcategory: 'Necklaces',
+    price: 36500,
+    originalPrice: 44000,
+    discount: 17,
+    images: [kundanBridalNecklaceImg],
+    colors: [
+      { name: 'Royal Gold & Polki', hex: '#eab308' },
+      { name: 'Emerald Green Drops', hex: '#047857' }
+    ],
+    sizes: ['Standard / Adjustable Choker'],
+    description: 'Premium bridal Kundan necklace set featuring detailed stone work and an elegant royal finish. Handcrafted with layered polki stones, gold foil settings, and emerald bead drops for monumental wedding gala presence.',
+    shortDescription: 'Royal Kundan bridal necklace set with uncut polki and emerald bead tassels.',
+    material: '22K Gold Foil Meenakari, Uncut Kundan Glass Polki & Emerald Beads',
+    craftType: 'Kundan Stone Setting',
+    occasion: 'Wedding',
+    isBridal: true,
+    isNew: true,
+    isFeatured: true,
+    inStock: true,
+    rating: 4.9,
+    reviewsCount: 29,
+    details: [
+      'Authentic handcrafted Kundan setting with back meenakari enameling',
+      'Natural hydro-emerald bead clusters and micro seed pearls',
+      'Complete with statement matching drop earrings',
+      'Tailored for royal wedding lehengas and reception attire'
+    ],
+    careInstructions: [
+      'Store flat in a velvet-lined box',
+      'Avoid moisture and direct perfume contact',
+      'Clean gently with dry microfiber cloth'
+    ]
+  },
+  {
+    id: 'td-jwl-03',
+    name: 'Lakshmi Haram Necklace',
+    category: 'jewellery',
+    subcategory: 'Haram',
+    price: 62000,
+    originalPrice: 75000,
+    discount: 17,
+    images: [lakshmiHaramImg],
+    colors: [
+      { name: 'Heritage Antique Gold', hex: '#ca8a04' }
+    ],
+    sizes: ['Long Haram (26-28 Inches)'],
+    description: 'Traditional long Lakshmi haram inspired necklace featuring intricate motifs and a luxurious bridal aesthetic. Designed with embossed kasu coins and an imperial Lakshmi pendant symbolizing timeless prosperity.',
+    shortDescription: 'Imperial long Lakshmi haram with embossed coin kasu motifs and antique finish.',
+    material: '22K Heritage Gold Tone Alloy & Ruby Kemp Stones',
+    craftType: 'Temple Jewellery Craft',
+    occasion: 'Wedding',
+    isBridal: true,
+    isNew: true,
+    isFeatured: true,
+    inStock: true,
+    rating: 5.0,
+    reviewsCount: 42,
+    details: [
+      'Authentic South Indian Kasu Malai styling with grand medallion pendant',
+      '26-inch length designed to drape elegantly over bridal Kanchipuram sarees',
+      'Detailed peacocks flanking the divine deity throne',
+      'Secure traditional screw-thread clasp'
+    ],
+    careInstructions: [
+      'Store wrapped in mul-mul cotton cloth or zip lock',
+      'Do not expose to chemicals or sweat',
+      'Professional re-polish service available'
+    ]
+  },
+  {
+    id: 'td-jwl-04',
+    name: 'Ruby Emerald Jhumka Set',
+    category: 'jewellery',
+    subcategory: 'Earrings',
+    price: 18500,
+    originalPrice: 22000,
+    discount: 16,
+    images: [rubyEmeraldJhumkaImg],
+    colors: [
+      { name: 'Antique Gold', hex: '#d4af37' },
+      { name: 'Ruby & Emerald Multi', hex: '#881337' }
+    ],
+    sizes: ['Standard Pair'],
+    description: 'Elegant traditional jhumka earrings featuring ruby and emerald-inspired stone detailing. Designed with tiered bell silhouettes, seed pearl hangings, and intricate filigree flourishes.',
+    shortDescription: 'Traditional tiered jhumka earrings with vibrant ruby and emerald cabochons.',
+    material: '22K Gold Tone Metal, Synthetic Rubies, Emeralds & Fresh Water Pearls',
+    craftType: 'Antique Gold Polish',
+    occasion: 'Festive',
+    isBridal: false,
+    isNew: true,
+    isFeatured: true,
+    inStock: true,
+    rating: 4.8,
+    reviewsCount: 51,
+    details: [
+      'Two-tier bell jhumka with delicate filigree lattice',
+      'Studded with ruby and emerald-toned faceted stones',
+      'Lightweight hollow bell construction for all-day comfort',
+      'South Indian push-back closure with extra silicone stoppers'
+    ],
+    careInstructions: [
+      'Keep away from hairspray and cosmetics',
+      'Store in separate compartments to avoid scratching',
+      'Clean with soft dry brush'
+    ]
+  },
+  {
+    id: 'td-jwl-05',
+    name: 'Bridal Bangles & Bangle Set',
+    category: 'jewellery',
+    subcategory: 'Bangles',
+    price: 29500,
+    originalPrice: 35000,
+    discount: 15,
+    images: [bridalBanglesImg],
+    colors: [
+      { name: 'Bright Temple Gold', hex: '#eab308' }
+    ],
+    sizes: ['2.4', '2.6', '2.8'],
+    description: 'Premium bridal bangle set with intricate traditional detailing and a rich festive finish. Crafted with embossed paisley and floral borders, this set of 4 statement kadas completes any festive muhurtham ensemble.',
+    shortDescription: 'Set of 4 handcrafted bridal gold kadas with embossed floral chilai work.',
+    material: '22K Yellow Gold Plated Brass with High-Relief Chilai Carvings',
+    craftType: 'Antique Gold Polish',
+    occasion: 'Wedding',
+    isBridal: true,
+    isNew: true,
+    isFeatured: true,
+    inStock: true,
+    rating: 4.9,
+    reviewsCount: 34,
+    details: [
+      'Set of 4 heavy-look traditional bridal bangles',
+      'Deeply carved floral vines and diamond chilai borders',
+      'Smooth inner comfort finish preventing skin pinching',
+      'Available in standard Indian sizes: 2.4, 2.6, 2.8'
+    ],
+    careInstructions: [
+      'Store in velvet bangle box',
+      'Avoid contact with alcohol-based sanitizers',
+      'Wipe with soft lint-free flannel after wear'
+    ]
   }
 ];
 
@@ -708,11 +900,12 @@ export const getActiveProducts = (): Product[] => {
     if (saved) {
       const parsed = JSON.parse(saved);
       if (Array.isArray(parsed) && parsed.length > 0) {
-        // Invalidate old cache if it still contains unsplash URLs
+        // Invalidate old cache if it still contains unsplash URLs or lacks jewellery category
         const hasOldUnsplash = parsed.some(
           (p: Product) => p.images && p.images[0] && p.images[0].includes('unsplash.com')
         );
-        if (!hasOldUnsplash) {
+        const hasJewellery = parsed.some((p: Product) => p.category === 'jewellery');
+        if (!hasOldUnsplash && hasJewellery) {
           return parsed;
         } else {
           localStorage.removeItem('thireeshaw_custom_products');

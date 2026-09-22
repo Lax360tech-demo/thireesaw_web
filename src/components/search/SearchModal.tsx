@@ -12,12 +12,14 @@ interface SearchModalProps {
 
 const POPULAR_SEARCHES = [
   'Bridal Saree',
+  'Temple Jewellery',
   'Pattu Blouse',
-  'Aari Work',
+  'Kundan Necklace',
+  'Lakshmi Haram',
   'Emerald Gagra',
-  'Anarkali Salwar',
-  'Hand Embroidery',
-  'Wedding Blouse'
+  'Ruby Jhumka',
+  'Bridal Bangles',
+  'Anarkali Salwar'
 ];
 
 export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => {

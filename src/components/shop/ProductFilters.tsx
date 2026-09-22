@@ -15,6 +15,8 @@ const CATEGORIES = [
   { label: 'Sarees', value: 'sarees' },
   { label: 'Salwar', value: 'salwar' },
   { label: 'Gagra', value: 'gagra' },
+  { label: 'Jewellery', value: 'jewellery' },
+  { label: 'Bridal', value: 'bridal' },
   { label: 'Blouses', value: 'blouses' }
 ];
 

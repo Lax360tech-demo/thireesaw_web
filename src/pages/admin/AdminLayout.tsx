@@ -31,7 +31,7 @@ export const AdminLayout: React.FC = () => {
             <img 
               src={BRAND.logo} 
               alt={BRAND.name} 
-              className="h-9 w-auto object-contain transition-transform group-hover:scale-105"
+              className="h-9 w-9 rounded-full object-contain shadow-sm shadow-black/40 transition-transform group-hover:scale-105"
             />
             <div>
               <h1 className="font-serif text-sm font-bold tracking-wider text-white">

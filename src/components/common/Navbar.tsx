@@ -72,7 +72,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch, onOpenMobileMenu }
               <img
                 src={BRAND_CONFIG.logoUrl}
                 alt="Thireeshaw Designers Logo"
-                className="h-9 sm:h-10 md:h-11 w-auto max-w-[46px] object-contain transition-transform duration-300 group-hover:scale-105"
+                className="h-9 w-9 sm:h-10 sm:w-10 md:h-11 md:w-11 rounded-full object-contain shadow-sm shadow-black/40 transition-transform duration-300 group-hover:scale-105"
               />
             </div>
 

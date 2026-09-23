@@ -1,4 +1,4 @@
-import brandLogo from '../assets/brand/logo.svg';
+import brandLogo from '../assets/brand/logo.png';
 
 export const BRAND_CONFIG = {
   name: 'THIREESHAW DESIGNERS',

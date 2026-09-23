@@ -52,7 +52,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
                   <img
                     src={BRAND_CONFIG.logoUrl}
                     alt="Logo"
-                    className="h-10 w-auto max-w-[40px] object-contain"
+                    className="h-10 w-10 rounded-full object-contain shadow-sm shadow-black/40"
                   />
                   <div className="flex flex-col">
                     <div className="flex items-center gap-1">

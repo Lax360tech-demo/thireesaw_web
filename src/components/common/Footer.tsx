@@ -26,7 +26,7 @@ export const Footer: React.FC = () => {
                 <img
                   src={BRAND.logo}
                   alt={BRAND.name}
-                  className="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                  className="h-11 w-11 sm:h-12 sm:w-12 rounded-full object-contain shadow-md shadow-black/50 transition-transform duration-300 group-hover:scale-105"
                 />
                 <div>
                   <div className="flex items-center gap-2">

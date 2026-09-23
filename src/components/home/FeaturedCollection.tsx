@@ -41,15 +41,15 @@ export const FeaturedCollection: React.FC = () => {
 
           <Link
             to="/shop"
-            className="mt-6 md:mt-0 inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] font-semibold text-[#fbbf24] hover:text-white transition-colors"
+            className="btn-press mt-6 md:mt-0 inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] font-semibold text-[#fbbf24] hover:text-white transition-colors cursor-pointer"
           >
             <span>VIEW ALL CREATIONS</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
 
-        {/* 8 Products Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
+        {/* 8 Products Responsive Grid */}
+        <div className="grid grid-cols-1 min-[420px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
           {featuredProducts.map((product) => (
             <ProductCard
               key={product.id}

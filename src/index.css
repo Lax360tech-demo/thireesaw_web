@@ -106,3 +106,45 @@
 .animate-marquee:hover {
   animation-play-state: paused;
 }
+
+/* Luxury 3D Perspective & Depth Utilities */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.perspective-800 {
+  perspective: 800px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+/* 3D Button Press Effect */
+.btn-press {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-press:hover {
+  transform: translateY(-2px);
+}
+
+.btn-press:active {
+  transform: translateY(1px);
+}
+
+/* Accessibility: prefers-reduced-motion compliance */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-marquee {
+    animation: none !important;
+  }
+  .btn-press:hover, .btn-press:active {
+    transform: none !important;
+  }
+}

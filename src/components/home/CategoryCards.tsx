@@ -29,37 +29,42 @@ export const CategoryCards: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-50px' }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
+              className="perspective-1000"
             >
               <Link
                 to={`/category/${cat.slug}`}
-                className="group relative block aspect-[3/4.4] w-full rounded-2xl overflow-hidden bg-[#111116] border border-white/10 hover:border-white/30 transition-all duration-500 shadow-2xl"
+                className="group relative block aspect-[3/4.4] w-full rounded-2xl overflow-hidden bg-[#111116] border border-white/10 hover:border-white/30 transition-all duration-500 shadow-xl hover:shadow-[0_25px_50px_rgba(0,0,0,0.85)] hover:-translate-y-1.5 preserve-3d"
               >
-                {/* Category Image */}
+                {/* Category Image with subtle 3D depth */}
                 <img
                   src={cat.image}
                   alt={cat.name}
-                  className="w-full h-full object-cover object-top filter brightness-[0.75] contrast-[1.05] transition-transform duration-700 ease-out group-hover:scale-105 group-hover:brightness-[0.6]"
+                  className="w-full h-full object-cover object-top filter brightness-[0.82] contrast-[1.05] transition-all duration-700 ease-out group-hover:scale-108 group-hover:brightness-[0.7]"
+                  style={{ transform: 'translateZ(6px)' }}
                 />
 
                 {/* Gradient Dark Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent opacity-85 group-hover:opacity-95 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/35 to-transparent opacity-85 group-hover:opacity-95 transition-opacity duration-300 pointer-events-none" />
 
                 {/* Corner Badge */}
                 {cat.badge && (
-                  <div className="absolute top-4 left-4 z-10">
+                  <div className="absolute top-4 left-4 z-10" style={{ transform: 'translateZ(14px)' }}>
                     <span className="text-[10px] uppercase tracking-widest px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-[#fbbf24] font-medium">
                       {cat.badge}
                     </span>
                   </div>
                 )}
 
-                {/* Content Box */}
-                <div className="absolute inset-x-0 bottom-0 p-6 z-10 flex flex-col justify-end transform transition-transform duration-300 group-hover:-translate-y-2">
-                  <span className="text-[11px] uppercase tracking-[0.25em] text-[#ff62a6] font-medium mb-1">
+                {/* Content Box - Stable with layered depth */}
+                <div
+                  className="absolute inset-x-0 bottom-0 p-6 z-10 flex flex-col justify-end transform transition-transform duration-300 group-hover:-translate-y-1"
+                  style={{ transform: 'translateZ(18px)' }}
+                >
+                  <span className="text-[11px] uppercase tracking-[0.25em] text-[#ff62a6] font-medium mb-1 drop-shadow-sm">
                     {count} Designs Available
                   </span>
 
-                  <h3 className="font-serif text-2xl sm:text-3xl text-white font-normal uppercase tracking-wider mb-2">
+                  <h3 className="font-serif text-2xl sm:text-3xl text-white font-normal uppercase tracking-wider mb-2 drop-shadow-md">
                     {cat.name}
                   </h3>
 

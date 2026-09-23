@@ -256,7 +256,7 @@ export const ProductDetailPage: React.FC = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <button
                   onClick={handleAddToCart}
-                  className="py-4 px-6 rounded-xl bg-[#ff2a85] hover:bg-[#ff4396] text-white text-xs uppercase tracking-[0.2em] font-semibold transition-all shadow-xl shadow-[#ff2a85]/30 flex items-center justify-center gap-2"
+                  className="btn-press py-4 px-6 rounded-xl bg-[#ff2a85] hover:bg-[#ff4396] text-white text-xs uppercase tracking-[0.2em] font-semibold transition-all shadow-xl shadow-[#ff2a85]/30 hover:shadow-2xl hover:shadow-[#ff2a85]/50 flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <ShoppingBag className="w-4 h-4" />
                   <span>ADD TO BAG</span>
@@ -264,7 +264,7 @@ export const ProductDetailPage: React.FC = () => {
 
                 <button
                   onClick={handleBuyNow}
-                  className="py-4 px-6 rounded-xl bg-[#fbbf24] hover:bg-[#fde047] text-black text-xs uppercase tracking-[0.2em] font-bold transition-all shadow-xl shadow-[#fbbf24]/20 flex items-center justify-center gap-2"
+                  className="btn-press py-4 px-6 rounded-xl bg-[#fbbf24] hover:bg-[#fde047] text-black text-xs uppercase tracking-[0.2em] font-bold transition-all shadow-xl shadow-[#fbbf24]/20 hover:shadow-2xl hover:shadow-[#fbbf24]/40 flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <span>BUY NOW</span>
                 </button>
@@ -272,13 +272,13 @@ export const ProductDetailPage: React.FC = () => {
 
               <button
                 onClick={() => toggleWishlist(product)}
-                className={`w-full py-3 px-4 rounded-xl border text-xs uppercase tracking-widest font-medium transition-colors flex items-center justify-center gap-2 ${
+                className={`btn-press w-full py-3.5 px-4 rounded-xl border text-xs uppercase tracking-widest font-medium transition-all flex items-center justify-center gap-2 cursor-pointer ${
                   inWishlist
-                    ? 'bg-[#ff2a85]/15 border-[#ff2a85] text-[#ff62a6]'
+                    ? 'bg-[#ff2a85]/20 border-[#ff2a85] text-[#ff62a6] shadow-lg shadow-[#ff2a85]/20'
                     : 'border-white/15 text-gray-300 hover:bg-white/5 hover:text-white'
                 }`}
               >
-                <Heart className={`w-4 h-4 ${inWishlist ? 'fill-[#ff2a85]' : ''}`} />
+                <Heart className={`w-4 h-4 transition-transform ${inWishlist ? 'fill-[#ff2a85] scale-110' : ''}`} />
                 <span>{inWishlist ? 'SAVED IN YOUR WISHLIST' : 'ADD TO WISHLIST'}</span>
               </button>
 

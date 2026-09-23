@@ -111,7 +111,7 @@ export const BridalBlouseFeature: React.FC = () => {
             <div>
               <Link
                 to="/custom-blouse"
-                className="inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-[#ff2a85] hover:bg-[#ff4396] text-white text-xs uppercase tracking-[0.2em] font-semibold transition-all shadow-xl shadow-[#ff2a85]/30 group"
+                className="btn-press inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-[#ff2a85] hover:bg-[#ff4396] text-white text-xs uppercase tracking-[0.2em] font-semibold transition-all shadow-xl shadow-[#ff2a85]/30 hover:shadow-2xl hover:shadow-[#ff2a85]/50 group cursor-pointer"
               >
                 <span>DESIGN YOUR BLOUSE</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

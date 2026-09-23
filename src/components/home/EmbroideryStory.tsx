@@ -64,24 +64,25 @@ export const EmbroideryStory: React.FC = () => {
                 transition={{ duration: 0.6, delay: idx * 0.15 }}
                 className="group flex flex-col"
               >
-                {/* Magazine Photo Card */}
-                <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-[#121218] border border-white/10 mb-6">
+                {/* Magazine Photo Card with 3D Depth */}
+                <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-[#121218] border border-white/10 group-hover:border-white/25 group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.7)] group-hover:-translate-y-1.5 transition-all duration-500 mb-6 preserve-3d">
                   <img
                     src={story.image}
                     alt={story.title}
-                    className="w-full h-full object-cover object-center filter brightness-[0.78] contrast-[1.05] group-hover:scale-105 transition-transform duration-700 ease-out"
+                    className="w-full h-full object-cover object-center filter brightness-[0.82] contrast-[1.05] group-hover:scale-105 transition-transform duration-700 ease-out"
+                    style={{ transform: 'translateZ(6px)' }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 pointer-events-none" />
 
                   {/* Corner Pill */}
-                  <div className="absolute top-3.5 left-3.5">
+                  <div className="absolute top-3.5 left-3.5" style={{ transform: 'translateZ(14px)' }}>
                     <span className="text-[10px] uppercase tracking-widest px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-white font-medium">
                       {story.tag}
                     </span>
                   </div>
 
                   {/* Floating Number (01, 02, 03) */}
-                  <div className="absolute bottom-4 right-4 font-serif text-4xl sm:text-5xl font-light text-white/20 group-hover:text-white/40 transition-colors">
+                  <div className="absolute bottom-4 right-4 font-serif text-4xl sm:text-5xl font-light text-white/20 group-hover:text-white/40 transition-colors" style={{ transform: 'translateZ(12px)' }}>
                     0{idx + 1}
                   </div>
                 </div>

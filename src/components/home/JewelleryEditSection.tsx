@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Sparkles, Gem } from 'lucide-react';
+import { ArrowRight, Gem } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { PRODUCTS } from '../../data/products';
 import { ProductCard } from '../shop/ProductCard';
@@ -43,15 +43,15 @@ export const JewelleryEditSection: React.FC = () => {
 
           <Link
             to="/category/jewellery"
-            className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-[#fbbf24] hover:text-white font-semibold transition-colors group self-start md:self-end pb-1 border-b border-[#fbbf24]/40 hover:border-white"
+            className="btn-press inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-[#fbbf24] hover:text-white font-semibold transition-colors group self-start md:self-end pb-1 border-b border-[#fbbf24]/40 hover:border-white cursor-pointer"
           >
             <span>EXPLORE JEWELLERY</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
 
-        {/* 5 Jewellery Products Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
+        {/* 5 Jewellery Products Responsive Grid */}
+        <div className="grid grid-cols-1 min-[420px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
           {jewelleryProducts.map((product) => (
             <ProductCard
               key={product.id}

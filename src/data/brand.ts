@@ -24,7 +24,7 @@ export const BRAND_CONFIG = {
   },
   social: {
     whatsapp: 'https://wa.me/919865366447?text=Hi%20Thireeshaw%20Designers%2C%20I%20would%20like%20to%20know%20more%20about%20your%20collections%20and%20customized%20blouse%20designs.',
-    instagram: 'https://instagram.com',
+    instagram: 'https://www.instagram.com/thireeshaw_designers?stkn=dGJtNHUwczJ1ZHdv',
     facebook: 'https://facebook.com'
   }
 };

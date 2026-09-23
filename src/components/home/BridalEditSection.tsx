@@ -74,16 +74,17 @@ export const BridalEditSection: React.FC = () => {
             >
               <Link
                 to={pillar.link}
-                className="group relative block aspect-[3/4] rounded-2xl overflow-hidden bg-[#111116] border border-white/10 hover:border-[#ff2a85]/40 transition-all duration-300"
+                className="group relative block aspect-[3/4] rounded-2xl overflow-hidden bg-[#111116] border border-white/10 hover:border-[#ff2a85]/40 hover:-translate-y-1.5 hover:shadow-[0_20px_40px_rgba(0,0,0,0.7)] transition-all duration-300 preserve-3d"
               >
                 <img
                   src={pillar.image}
                   alt={pillar.title}
-                  className="w-full h-full object-cover object-center filter brightness-[0.75] group-hover:scale-105 transition-transform duration-700 ease-out"
+                  className="w-full h-full object-cover object-center filter brightness-[0.78] group-hover:scale-105 transition-transform duration-700 ease-out"
+                  style={{ transform: 'translateZ(6px)' }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent opacity-90" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent opacity-90 pointer-events-none" />
 
-                <div className="absolute inset-x-0 bottom-0 p-5 flex flex-col justify-end">
+                <div className="absolute inset-x-0 bottom-0 p-5 flex flex-col justify-end" style={{ transform: 'translateZ(14px)' }}>
                   <h4 className="font-serif text-xl sm:text-2xl text-white font-normal group-hover:text-[#fbbf24] transition-colors">
                     {pillar.title}
                   </h4>
@@ -100,11 +101,11 @@ export const BridalEditSection: React.FC = () => {
           ))}
         </div>
 
-        {/* Central CTA */}
+        {/* Central CTA with 3D Press Effect */}
         <div className="text-center pt-4">
           <Link
             to="/category/bridal"
-            className="inline-flex items-center gap-3 px-10 py-4 rounded-xl bg-gradient-to-r from-[#ff2a85] to-[#f43f5e] hover:from-[#ff4396] hover:to-[#fb7185] text-white text-xs uppercase tracking-[0.25em] font-semibold transition-all shadow-xl shadow-[#ff2a85]/25 group"
+            className="btn-press inline-flex items-center gap-3 px-10 py-4 rounded-xl bg-gradient-to-r from-[#ff2a85] to-[#f43f5e] hover:from-[#ff4396] hover:to-[#fb7185] text-white text-xs uppercase tracking-[0.25em] font-semibold transition-all shadow-xl shadow-[#ff2a85]/30 hover:shadow-2xl hover:shadow-[#ff2a85]/50 group cursor-pointer"
           >
             <span>EXPLORE BRIDAL COLLECTION</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />

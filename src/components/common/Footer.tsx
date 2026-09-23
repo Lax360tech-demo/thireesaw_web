@@ -105,6 +105,11 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/category/jewellery" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all inline-block">
+                  Temple & Bridal Jewellery
+                </Link>
+              </li>
+              <li>
                 <Link to="/shop" className="text-[#fbbf24] hover:text-white transition-colors flex items-center gap-1.5 font-medium pt-1">
                   <span>Explore All Products</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
@@ -113,60 +118,64 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Column 3: BESPOKE CRAFT */}
+          {/* Column 3: ATELIER & SERVICES */}
           <div>
             <h4 className="font-serif text-sm tracking-[0.2em] text-white font-semibold uppercase mb-5">
-              BESPOKE CRAFT
+              ATELIER CRAFT
             </h4>
             <ul className="space-y-3 text-sm">
               <li>
-                <Link to="/custom-blouse" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all inline-block">
-                  Custom Blouse Studio
+                <Link to="/custom-blouse" className="text-[#fbbf24] hover:text-[#fde047] font-semibold hover:translate-x-1 transition-all inline-block">
+                  Customized Wedding Blouse
                 </Link>
               </li>
               <li>
-                <Link to="/category/blouses" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all inline-block">
-                  Hand Zardosi Work
+                <Link to="/about" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all inline-block">
+                  Hand & Machine Embroidery
                 </Link>
               </li>
               <li>
-                <Link to="/category/blouses" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all inline-block">
-                  Aari & Maggam Work
+                <Link to="/about" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all inline-block">
+                  Artisan Salem Atelier
                 </Link>
               </li>
               <li>
-                <Link to="/category/gagra" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all inline-block">
-                  Bridal Troussaeu
+                <Link to="/contact" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all inline-block">
+                  Bridal Trousseau Consultation
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="text-[#ff62a6] hover:text-[#ff2a85] transition-colors flex items-center gap-1.5 font-medium pt-1">
-                  <span>Book Consultation</span>
-                  <ArrowUpRight className="w-3.5 h-3.5" />
+                <Link to="/contact" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all inline-block">
+                  Custom Neckline & Back Framing
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Column 4: HELP & TRUST */}
+          {/* Column 4: CLIENT CARE & COMPLIANCE */}
           <div>
             <h4 className="font-serif text-sm tracking-[0.2em] text-white font-semibold uppercase mb-5">
-              HELP & POLICIES
+              CLIENT CARE
             </h4>
             <ul className="space-y-3 text-sm">
               <li>
                 <Link to="/contact" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all inline-block">
-                  Contact Salem Studio
+                  Contact Our Boutique
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all inline-block">
-                  Our Story & Heritage
+                <Link to="/shipping" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all inline-block">
+                  Worldwide Shipping & Delivery
                 </Link>
               </li>
               <li>
-                <Link to="/privacy" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all inline-block">
-                  Privacy Policy (DPDP Act)
+                <Link to="/returns" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all inline-block">
+                  Exchange & Atelier Guarantee
+                </Link>
+              </li>
+              <li>
+                <Link to="/faq" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all inline-block">
+                  Frequently Asked Questions
                 </Link>
               </li>
               <li>
@@ -177,11 +186,6 @@ export const Footer: React.FC = () => {
                   <Settings className="w-3.5 h-3.5 text-[#fbbf24]" />
                   <span>Privacy & Cookie Choices</span>
                 </button>
-              </li>
-              <li>
-                <Link to="/contact" className="text-gray-300 hover:text-white hover:translate-x-1 transition-all inline-block">
-                  Worldwide Courier Assistance
-                </Link>
               </li>
             </ul>
 
@@ -195,8 +199,8 @@ export const Footer: React.FC = () => {
                   href={BRAND_INFO.social.whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2.5 rounded-xl bg-white/5 hover:bg-[#25D366] text-gray-300 hover:text-black border border-white/10 hover:border-transparent transition-all shadow-[0_4px_12px_rgba(0,0,0,0.3)] hover:scale-105"
-                  aria-label="Chat on WhatsApp"
+                  className="btn-press p-2.5 rounded-xl bg-white/5 hover:bg-[#25D366] text-gray-300 hover:text-black border border-white/10 hover:border-transparent transition-all shadow-[0_4px_12px_rgba(0,0,0,0.3)] hover:scale-105"
+                  aria-label="Chat with THIREESHAW DESIGNERS on WhatsApp"
                 >
                   <MessageCircle className="w-4 h-4" />
                 </a>
@@ -204,8 +208,8 @@ export const Footer: React.FC = () => {
                   href={BRAND_INFO.social.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2.5 rounded-xl bg-white/5 hover:bg-[#ff2a85] text-gray-300 hover:text-white border border-white/10 hover:border-transparent transition-all shadow-[0_4px_12px_rgba(0,0,0,0.3)] hover:scale-105"
-                  aria-label="Follow on Instagram"
+                  className="btn-press p-2.5 rounded-xl bg-white/5 hover:bg-[#ff2a85] text-gray-300 hover:text-white border border-white/10 hover:border-transparent transition-all shadow-[0_4px_12px_rgba(0,0,0,0.3)] hover:scale-105"
+                  aria-label="Visit THIREESHAW DESIGNERS on Instagram"
                 >
                   <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
                     <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
@@ -215,7 +219,7 @@ export const Footer: React.FC = () => {
                   href={BRAND_INFO.social.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2.5 rounded-xl bg-white/5 hover:bg-blue-600 text-gray-300 hover:text-white border border-white/10 hover:border-transparent transition-all shadow-[0_4px_12px_rgba(0,0,0,0.3)] hover:scale-105"
+                  className="btn-press p-2.5 rounded-xl bg-white/5 hover:bg-blue-600 text-gray-300 hover:text-white border border-white/10 hover:border-transparent transition-all shadow-[0_4px_12px_rgba(0,0,0,0.3)] hover:scale-105"
                   aria-label="Follow on Facebook"
                 >
                   <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">

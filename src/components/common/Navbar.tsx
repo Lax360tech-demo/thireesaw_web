@@ -50,7 +50,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch, onOpenMobileMenu }
           ? 'py-2.5 bg-[#08080a]/92 backdrop-blur-xl border-b border-white/10 shadow-2xl shadow-black/70'
           : 'py-3.5 bg-gradient-to-b from-black/90 via-black/50 to-transparent border-b border-white/5'
       }`}
-      style={{ width: '100vw' }}
     >
       {/* Full-width container with generous padding */}
       <div className="w-full px-4 sm:px-6 md:px-8 xl:px-12">
@@ -59,7 +58,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch, onOpenMobileMenu }
           <div className="flex items-center lg:hidden">
             <button
               onClick={onOpenMobileMenu}
-              className="p-2 -ml-2 text-gray-300 hover:text-white rounded-lg hover:bg-white/10 transition-colors"
+              className="btn-press p-2 -ml-2 text-gray-300 hover:text-white rounded-lg hover:bg-white/10 transition-colors cursor-pointer"
               aria-label="Open mobile navigation"
             >
               <Menu className="w-5 h-5" />
@@ -101,7 +100,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch, onOpenMobileMenu }
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`relative text-[11px] xl:text-xs tracking-[0.14em] font-medium transition-colors py-1 whitespace-nowrap ${
+                  className={`relative text-[11px] xl:text-xs tracking-[0.14em] font-medium transition-all py-1 whitespace-nowrap hover:-translate-y-0.5 ${
                     active
                       ? 'text-white font-semibold'
                       : link.highlight
@@ -123,7 +122,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch, onOpenMobileMenu }
             {/* Search */}
             <button
               onClick={onOpenSearch}
-              className="p-2 text-gray-300 hover:text-white rounded-lg hover:bg-white/10 transition-colors"
+              className="btn-press p-2 text-gray-300 hover:text-white rounded-lg hover:bg-white/10 transition-colors cursor-pointer"
               aria-label="Open search"
             >
               <Search className="w-5 h-5" />
@@ -132,12 +131,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch, onOpenMobileMenu }
             {/* Wishlist */}
             <Link
               to="/wishlist"
-              className="relative p-2 text-gray-300 hover:text-[#ff62a6] rounded-lg hover:bg-white/10 transition-colors"
+              className="btn-press relative p-2 text-gray-300 hover:text-[#ff62a6] rounded-lg hover:bg-white/10 transition-colors cursor-pointer"
               aria-label={`Wishlist (${wishlistCount} items)`}
             >
               <Heart className="w-5 h-5" />
               {wishlistCount > 0 && (
-                <span className="absolute top-1 right-1 min-w-[17px] h-[17px] px-1 bg-[#ff2a85] text-white text-[10px] font-bold rounded-full flex items-center justify-center border-2 border-[#08080a]">
+                <span className="absolute top-1 right-1 min-w-[17px] h-[17px] px-1 bg-[#ff2a85] text-white text-[10px] font-bold rounded-full flex items-center justify-center border-2 border-[#08080a] animate-scaleIn">
                   {wishlistCount}
                 </span>
               )}
@@ -146,12 +145,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch, onOpenMobileMenu }
             {/* Shopping Bag */}
             <button
               onClick={openCart}
-              className="relative p-2 text-gray-300 hover:text-[#fbbf24] rounded-lg hover:bg-white/10 transition-colors"
+              className="btn-press relative p-2 text-gray-300 hover:text-[#fbbf24] rounded-lg hover:bg-white/10 transition-colors cursor-pointer"
               aria-label={`Shopping bag (${itemCount} items)`}
             >
               <ShoppingBag className="w-5 h-5" />
               {itemCount > 0 && (
-                <span className="absolute top-1 right-1 min-w-[17px] h-[17px] px-1 bg-[#fbbf24] text-black text-[10px] font-bold rounded-full flex items-center justify-center border-2 border-[#08080a]">
+                <span className="absolute top-1 right-1 min-w-[17px] h-[17px] px-1 bg-[#fbbf24] text-black text-[10px] font-bold rounded-full flex items-center justify-center border-2 border-[#08080a] animate-scaleIn">
                   {itemCount}
                 </span>
               )}

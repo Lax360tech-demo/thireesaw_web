@@ -18,7 +18,7 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
 }) => {
   if (isLoading) {
     return (
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+      <div className="grid grid-cols-1 min-[420px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
         {Array.from({ length: 8 }).map((_, i) => (
           <div key={i} className="animate-pulse flex flex-col space-y-3">
             <div className="aspect-[3/4] bg-white/5 rounded-xl border border-white/5" />
@@ -44,7 +44,7 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
         {onResetFilters && (
           <button
             onClick={onResetFilters}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/10 hover:bg-[#ff2a85] text-white text-xs uppercase tracking-widest font-semibold transition-colors"
+            className="btn-press inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/10 hover:bg-[#ff2a85] text-white text-xs uppercase tracking-widest font-semibold transition-colors cursor-pointer"
           >
             <RotateCcw className="w-3.5 h-3.5" />
             <span>Reset All Filters</span>
@@ -55,7 +55,7 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
   }
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+    <div className="grid grid-cols-1 min-[420px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
       {products.map((product) => (
         <ProductCard
           key={product.id}

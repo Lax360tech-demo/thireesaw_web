@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Phone, Mail, MapPin, Globe, MessageCircle, Send, CheckCircle2, AlertCircle } from 'lucide-react';
 import { BRAND_CONFIG } from '../data/brand';
 import { useToast } from '../context/ToastContext';
+import { TermsConsent } from '../components/common/TermsConsent';
 
 export const ContactPage: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +13,7 @@ export const ContactPage: React.FC = () => {
     message: ''
   });
 
+  const [termsAccepted, setTermsAccepted] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { addToast } = useToast();
@@ -32,6 +34,9 @@ export const ContactPage: React.FC = () => {
     } else if (formData.message.trim().length < 8) {
       errs.message = 'Message must be at least 8 characters long';
     }
+    if (!termsAccepted) {
+      errs.terms = 'Please accept the Terms & Conditions and Privacy Policy';
+    }
     setErrors(errs);
     return Object.keys(errs).length === 0;
   };
@@ -39,7 +44,11 @@ export const ContactPage: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) {
-      addToast('Validation Error', 'Please check the highlighted fields', 'error');
+      if (!termsAccepted) {
+        addToast('Terms Acceptance Required', 'Please review and accept our Terms & Conditions to submit your enquiry.', 'error');
+      } else {
+        addToast('Validation Error', 'Please check the highlighted fields', 'error');
+      }
       return;
     }
 
@@ -251,7 +260,7 @@ export const ContactPage: React.FC = () => {
                         if (errors.name) setErrors({ ...errors, name: '' });
                       }}
                       placeholder="e.g. Sangeetha Raman"
-                      className={`w-full bg-white/5 border rounded-xl px-4 py-3 text-sm text-white focus:outline-none ${
+                      className={`w-full bg-white/5 border rounded-xl px-4 py-3 text-base sm:text-sm text-white focus:outline-none ${
                         errors.name ? 'border-red-500' : 'border-white/15 focus:border-[#ff2a85]'
                       }`}
                     />
@@ -272,7 +281,7 @@ export const ContactPage: React.FC = () => {
                         if (errors.phone) setErrors({ ...errors, phone: '' });
                       }}
                       placeholder="e.g. 98653 66447"
-                      className={`w-full bg-white/5 border rounded-xl px-4 py-3 text-sm text-white focus:outline-none ${
+                      className={`w-full bg-white/5 border rounded-xl px-4 py-3 text-base sm:text-sm text-white focus:outline-none ${
                         errors.phone ? 'border-red-500' : 'border-white/15 focus:border-[#ff2a85]'
                       }`}
                     />
@@ -295,7 +304,7 @@ export const ContactPage: React.FC = () => {
                         if (errors.email) setErrors({ ...errors, email: '' });
                       }}
                       placeholder="e.g. yourname@gmail.com"
-                      className={`w-full bg-white/5 border rounded-xl px-4 py-3 text-sm text-white focus:outline-none ${
+                      className={`w-full bg-white/5 border rounded-xl px-4 py-3 text-base sm:text-sm text-white focus:outline-none ${
                         errors.email ? 'border-red-500' : 'border-white/15 focus:border-[#ff2a85]'
                       }`}
                     />
@@ -311,7 +320,7 @@ export const ContactPage: React.FC = () => {
                     <select
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                      className="w-full bg-[#15151c] border border-white/15 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#ff2a85]"
+                      className="w-full bg-[#15151c] border border-white/15 rounded-xl px-4 py-3 text-base sm:text-sm text-white focus:outline-none focus:border-[#ff2a85]"
                     >
                       <option value="Bridal Blouse Customization">Bridal Blouse Customization</option>
                       <option value="Pattu Blouse Embroidery">Pattu Blouse Embroidery</option>
@@ -333,7 +342,7 @@ export const ContactPage: React.FC = () => {
                       if (errors.message) setErrors({ ...errors, message: '' });
                     }}
                     placeholder="Tell us about your event, wedding date, or any specific embroidery pattern you love..."
-                    className={`w-full bg-white/5 border rounded-xl px-4 py-3 text-sm text-white focus:outline-none resize-none ${
+                    className={`w-full bg-white/5 border rounded-xl px-4 py-3 text-base sm:text-sm text-white focus:outline-none resize-none ${
                       errors.message ? 'border-red-500' : 'border-white/15 focus:border-[#ff2a85]'
                     }`}
                   />
@@ -343,6 +352,20 @@ export const ContactPage: React.FC = () => {
                     </p>
                   )}
                 </div>
+
+                {/* Terms and Conditions Consent */}
+                <TermsConsent
+                  checked={termsAccepted}
+                  onChange={(val) => {
+                    setTermsAccepted(val);
+                    if (errors.terms) {
+                      const next = { ...errors };
+                      delete next.terms;
+                      setErrors(next);
+                    }
+                  }}
+                  error={errors.terms}
+                />
 
                 <div className="pt-2">
                   <button

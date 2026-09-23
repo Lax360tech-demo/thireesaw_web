@@ -10,7 +10,7 @@ export const CategoryCards: React.FC = () => {
   const primaryCategories = CATEGORIES.filter((c) => c.id !== 'bridal');
 
   return (
-    <section className="py-20 sm:py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-10 sm:py-16 md:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <SectionHeading
         badge="COLLECTIONS"
         title="EXPLORE THE COLLECTION"

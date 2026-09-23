@@ -25,7 +25,7 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
   }[align];
 
   return (
-    <div className={`flex flex-col ${alignClass} mb-10 md:mb-14 ${className}`}>
+    <div className={`flex flex-col ${alignClass} mb-6 sm:mb-8 md:mb-10 ${className}`}>
       {badge && (
         <div className="mb-3">
           <Badge variant={badgeVariant}>{badge}</Badge>

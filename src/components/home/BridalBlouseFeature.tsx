@@ -7,12 +7,12 @@ import bridalBlouseSpotlightImg from '../../assets/home/bridal_blouse_spotlight.
 
 export const BridalBlouseFeature: React.FC = () => {
   return (
-    <section className="py-20 sm:py-28 relative overflow-hidden bg-[#08080a]">
+    <section className="py-10 sm:py-16 md:py-20 relative overflow-hidden bg-[#08080a]">
       {/* Glow */}
       <div className="absolute top-1/2 left-0 w-80 h-80 bg-[#ff2a85]/10 rounded-full blur-3xl pointer-events-none -translate-y-1/2" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Left: Close-up Imagery Showcase (Span 6) */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}

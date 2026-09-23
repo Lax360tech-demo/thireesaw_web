@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Check, ArrowRight, ArrowLeft, MessageCircle, Scissors, ShieldCheck, Ruler, Gem } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useToast } from '../../context/ToastContext';
+import { TermsConsent } from '../common/TermsConsent';
 
 import necklineSweetheartImg from '../../assets/studio/neckline_sweetheart.jpg';
 import necklineTempleUImg from '../../assets/studio/neckline_temple_u.jpg';
@@ -74,6 +75,8 @@ export const CustomBlouseStudio: React.FC = () => {
     notes: ''
   });
 
+  const [termsAccepted, setTermsAccepted] = useState(false);
+  const [termsError, setTermsError] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { addToast } = useToast();
 
@@ -102,6 +105,12 @@ export const CustomBlouseStudio: React.FC = () => {
     e.preventDefault();
     if (!contactInfo.name || !contactInfo.phone) {
       addToast('Information Required', 'Please provide your name and phone number', 'error');
+      return;
+    }
+
+    if (!termsAccepted) {
+      setTermsError('Please review and accept our Terms & Conditions');
+      addToast('Terms Agreement Required', 'Please review and accept our Terms & Conditions to submit your inquiry.', 'error');
       return;
     }
 
@@ -561,6 +570,18 @@ export const CustomBlouseStudio: React.FC = () => {
                       onChange={(e) => setContactInfo({ ...contactInfo, notes: e.target.value })}
                       placeholder="e.g. Muhurtham on 18th Nov. Matching my yellow Kanchipuram silk saree."
                       className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-[#ff2a85] resize-none"
+                    />
+                  </div>
+
+                  {/* Terms & Conditions Consent */}
+                  <div className="pt-2">
+                    <TermsConsent
+                      checked={termsAccepted}
+                      onChange={(val) => {
+                        setTermsAccepted(val);
+                        if (termsError) setTermsError('');
+                      }}
+                      error={termsError}
                     />
                   </div>
                 </div>

@@ -119,7 +119,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/25 opacity-40 group-hover:opacity-60 transition-opacity duration-300 pointer-events-none" />
 
         {/* Badges */}
-        <div className="absolute top-2.5 left-2.5 flex flex-col gap-1.5 z-10">
+        <div className="absolute top-1.5 left-1.5 sm:top-2.5 sm:left-2.5 flex flex-col gap-1 sm:gap-1.5 z-10">
           {product.isBridal && (
             <Badge variant="yellow" size="sm">Bridal</Badge>
           )}
@@ -134,27 +134,27 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         {/* Wishlist Heart Button */}
         <button
           onClick={handleWishlistClick}
-          className={`absolute top-2.5 right-2.5 z-10 p-2 rounded-full backdrop-blur-md transition-all duration-200 cursor-pointer ${
+          className={`absolute top-1.5 right-1.5 sm:top-2.5 sm:right-2.5 z-10 p-1.5 sm:p-2 rounded-full backdrop-blur-md transition-all duration-200 cursor-pointer ${
             inWishlist
               ? 'bg-[#ff2a85] text-white shadow-lg shadow-[#ff2a85]/50 scale-105'
               : 'bg-black/60 hover:bg-black text-white hover:text-[#ff62a6] border border-white/20'
           }`}
           aria-label={inWishlist ? `Remove ${product.name} from wishlist` : `Save ${product.name} to wishlist`}
         >
-          <Heart className={`w-4 h-4 transition-transform ${inWishlist ? 'fill-white scale-110' : ''}`} />
+          <Heart className={`w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform ${inWishlist ? 'fill-white scale-110' : ''}`} />
         </button>
 
         {/* Quick Actions Bar with 3D Depth */}
         <div
-          className="absolute inset-x-3 bottom-3 z-10 flex items-center gap-2 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300"
+          className="absolute inset-x-1.5 sm:inset-x-3 bottom-1.5 sm:bottom-3 z-10 flex items-center gap-1.5 sm:gap-2 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300"
           style={{ transform: isHovered ? 'translateZ(15px)' : 'translateZ(0px)' }}
         >
           {onQuickView && (
             <button
               onClick={handleQuickViewClick}
-              className="btn-press flex-1 py-2 px-2.5 rounded-lg bg-black/80 hover:bg-black backdrop-blur-md text-white text-[11px] uppercase tracking-wider font-semibold border border-white/20 hover:border-white/40 transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+              className="btn-press flex-1 py-1.5 sm:py-2 px-1.5 sm:px-2.5 rounded-lg bg-black/80 hover:bg-black backdrop-blur-md text-white text-[10px] sm:text-[11px] uppercase tracking-wider font-semibold border border-white/20 hover:border-white/40 transition-colors flex items-center justify-center gap-1 sm:gap-1.5 cursor-pointer"
             >
-              <Eye className="w-3.5 h-3.5 text-[#fbbf24]" />
+              <Eye className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#fbbf24]" />
               <span className="hidden sm:inline">Quick View</span>
               <span className="sm:hidden">View</span>
             </button>
@@ -162,35 +162,35 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
           <button
             onClick={handleQuickAdd}
-            className="btn-press flex-1 py-2 px-2.5 rounded-lg bg-[#ff2a85] hover:bg-[#ff4396] text-white text-[11px] uppercase tracking-wider font-semibold transition-colors shadow-md shadow-[#ff2a85]/30 flex items-center justify-center gap-1.5 cursor-pointer"
+            className="btn-press flex-1 py-1.5 sm:py-2 px-1.5 sm:px-2.5 rounded-lg bg-[#ff2a85] hover:bg-[#ff4396] text-white text-[10px] sm:text-[11px] uppercase tracking-wider font-semibold transition-colors shadow-md shadow-[#ff2a85]/30 flex items-center justify-center gap-1 sm:gap-1.5 cursor-pointer"
           >
-            <ShoppingBag className="w-3.5 h-3.5" />
+            <ShoppingBag className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
             <span>+ Bag</span>
           </button>
         </div>
       </div>
 
       {/* Product Information */}
-      <div className="pt-3 pb-1 flex flex-col">
-        <div className="flex items-center justify-between gap-1 text-[11px] uppercase tracking-widest text-gray-400">
+      <div className="pt-2 sm:pt-3 pb-1 flex flex-col">
+        <div className="flex items-center justify-between gap-1 text-[9.5px] sm:text-[11px] uppercase tracking-widest text-gray-400">
           <span className="truncate">{product.subcategory}</span>
           <div className="flex items-center gap-0.5 text-[#fbbf24] shrink-0">
-            <Star className="w-3 h-3 fill-[#fbbf24]" />
+            <Star className="w-2.5 h-2.5 sm:w-3 sm:h-3 fill-[#fbbf24]" />
             <span className="font-semibold text-white">{product.rating}</span>
           </div>
         </div>
 
-        <h3 className="font-sans text-sm font-medium text-white group-hover:text-[#fbbf24] transition-colors line-clamp-1 mt-1">
+        <h3 className="font-sans text-xs sm:text-sm font-medium text-white group-hover:text-[#fbbf24] transition-colors line-clamp-1 mt-0.5 sm:mt-1">
           {product.name}
         </h3>
 
-        <div className="flex items-center justify-between mt-1.5">
-          <div className="flex items-baseline gap-2">
-            <span className="text-sm sm:text-base font-semibold text-white font-sans">
+        <div className="flex items-center justify-between mt-1 sm:mt-1.5">
+          <div className="flex items-baseline gap-1.5 sm:gap-2">
+            <span className="text-xs sm:text-base font-semibold text-white font-sans">
               ₹{product.price.toLocaleString('en-IN')}
             </span>
             {product.originalPrice && (
-              <span className="text-xs text-gray-500 line-through">
+              <span className="text-[10px] sm:text-xs text-gray-500 line-through">
                 ₹{product.originalPrice.toLocaleString('en-IN')}
               </span>
             )}
@@ -200,13 +200,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             {product.colors.slice(0, 3).map((c) => (
               <span
                 key={c.name}
-                className="w-2.5 h-2.5 rounded-full border border-white/20"
+                className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full border border-white/20"
                 style={{ backgroundColor: c.hex }}
                 title={c.name}
               />
             ))}
             {product.colors.length > 3 && (
-              <span className="text-[9px] text-gray-400">+{product.colors.length - 3}</span>
+              <span className="text-[8px] sm:text-[9px] text-gray-400">+{product.colors.length - 3}</span>
             )}
           </div>
         </div>

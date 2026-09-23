@@ -37,12 +37,12 @@ const BRIDAL_PILLARS = [
 
 export const BridalEditSection: React.FC = () => {
   return (
-    <section className="py-24 sm:py-32 relative bg-[#050507] overflow-hidden border-t border-white/5">
+    <section className="py-10 sm:py-16 md:py-20 relative bg-[#050507] overflow-hidden border-t border-white/5">
       {/* Background ambient lighting */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-gradient-to-r from-[#ff2a85]/10 via-[#fbbf24]/5 to-[#ff2a85]/10 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8 md:mb-10">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-[#fbbf24] uppercase tracking-[0.25em] mb-4">
             <Diamond className="w-3 h-3" />
             <span>EXCLUSIVE COUTURE</span>

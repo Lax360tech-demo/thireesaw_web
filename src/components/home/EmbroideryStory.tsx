@@ -42,7 +42,7 @@ const STORIES = [
 
 export const EmbroideryStory: React.FC = () => {
   return (
-    <section className="py-20 sm:py-28 bg-[#09090d] border-t border-white/5">
+    <section className="py-10 sm:py-16 md:py-20 bg-[#09090d] border-t border-white/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           badge="ATELIER PILLARS"

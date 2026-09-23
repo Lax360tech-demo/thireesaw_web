@@ -51,41 +51,41 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenMobileMenu }) => {
       }`}
     >
       {/* Full-width container with generous padding */}
-      <div className="w-full px-4 sm:px-6 md:px-8 xl:px-12">
-        <div className="flex items-center justify-between gap-4">
+      <div className="w-full px-3 sm:px-6 md:px-8 xl:px-12">
+        <div className="grid grid-cols-[auto_1fr_auto] lg:flex items-center justify-between gap-2 sm:gap-4 w-full">
           {/* Mobile Left: Menu Hamburger */}
-          <div className="flex items-center lg:hidden">
+          <div className="flex items-center lg:hidden shrink-0">
             <button
               onClick={onOpenMobileMenu}
-              className="btn-press p-2 -ml-2 text-gray-300 hover:text-white rounded-lg hover:bg-white/10 transition-colors cursor-pointer"
+              className="btn-press p-2 -ml-1 text-gray-300 hover:text-white rounded-lg hover:bg-white/10 transition-colors cursor-pointer"
               aria-label="Open mobile navigation"
             >
               <Menu className="w-5 h-5" />
             </button>
           </div>
 
-          {/* Left Brand: Uploaded Logo + Compact Wordmark */}
-          <Link to="/" className="flex items-center gap-2.5 sm:gap-3 shrink-0 group">
+          {/* Brand: Uploaded Logo + Wordmark (Centered on mobile, left on desktop) */}
+          <Link to="/" className="flex items-center justify-center lg:justify-start gap-1.5 sm:gap-2.5 min-w-0 group overflow-hidden">
             {/* Logo Image */}
-            <div className="relative flex items-center justify-center">
+            <div className="relative flex items-center justify-center shrink-0">
               <img
                 src={BRAND_CONFIG.logoUrl}
                 alt="Thireeshaw Designers Logo"
-                className="h-9 w-9 sm:h-10 sm:w-10 md:h-11 md:w-11 rounded-full object-contain shadow-sm shadow-black/40 transition-transform duration-300 group-hover:scale-105"
+                className="h-8 w-8 sm:h-9 sm:w-9 md:h-11 md:w-11 rounded-full object-contain shadow-sm shadow-black/40 transition-transform duration-300 group-hover:scale-105"
               />
             </div>
 
             {/* Compact Brand Typography */}
-            <div className="flex flex-col">
-              <div className="flex items-center gap-1">
-                <span className="font-serif text-sm sm:text-base font-medium tracking-[0.16em] text-white uppercase group-hover:text-[#fbbf24] transition-colors">
+            <div className="flex flex-col min-w-0 text-center lg:text-left overflow-hidden">
+              <div className="flex items-center justify-center lg:justify-start gap-1 truncate">
+                <span className="font-serif text-xs xs:text-sm sm:text-base font-medium tracking-[0.14em] text-white uppercase group-hover:text-[#fbbf24] transition-colors truncate">
                   THIREESHAW
                 </span>
-                <span className="font-serif text-sm sm:text-base font-light tracking-[0.16em] text-[#ff2a85] uppercase">
+                <span className="font-serif text-xs xs:text-sm sm:text-base font-light tracking-[0.14em] text-[#ff2a85] uppercase shrink-0">
                   DESIGNERS
                 </span>
               </div>
-              <span className="text-[8px] sm:text-[9px] tracking-[0.22em] text-gray-400 uppercase font-sans font-medium">
+              <span className="hidden xs:block text-[7.5px] sm:text-[9px] tracking-[0.2em] text-gray-400 uppercase font-sans font-medium truncate">
                 {BRAND_CONFIG.tagline}
               </span>
             </div>
@@ -117,7 +117,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenMobileMenu }) => {
           </nav>
 
           {/* Right Action Icons: Wishlist, Cart */}
-          <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+          <div className="flex items-center gap-1 sm:gap-2 shrink-0 justify-end">
             {/* Wishlist */}
             <Link
               to="/wishlist"

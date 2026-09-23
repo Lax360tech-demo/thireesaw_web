@@ -27,9 +27,9 @@ export const FeaturedCollection: React.FC = () => {
     .filter((p): p is Product => Boolean(p));
 
   return (
-    <section className="py-20 sm:py-28 bg-[#0b0b10] border-y border-white/5">
+    <section className="py-10 sm:py-16 md:py-20 bg-[#0b0b10] border-y border-white/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 sm:mb-8">
           <SectionHeading
             badge="HANDPICKED COUTURE"
             badgeVariant="yellow"
@@ -49,7 +49,7 @@ export const FeaturedCollection: React.FC = () => {
         </div>
 
         {/* 8 Products Responsive Grid */}
-        <div className="grid grid-cols-1 min-[420px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-4 md:gap-6 lg:gap-8">
           {featuredProducts.map((product) => (
             <ProductCard
               key={product.id}
@@ -60,7 +60,7 @@ export const FeaturedCollection: React.FC = () => {
         </div>
 
         {/* Bottom Callout */}
-        <div className="mt-14 text-center">
+        <div className="mt-8 sm:mt-10 text-center">
           <div className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-white/5 border border-white/10 text-xs text-gray-300">
             <span className="w-2 h-2 rounded-full bg-[#ff2a85]" />
             <span>Looking for custom necklines, sleeve lengths, or heirloom zari?</span>

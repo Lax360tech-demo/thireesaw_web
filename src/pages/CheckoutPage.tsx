@@ -5,6 +5,7 @@ import { ShieldCheck, Truck, CreditCard, QrCode, CheckCircle2, ArrowRight, Shopp
 import { useCart } from '../context/CartContext';
 import { BRAND_CONFIG } from '../data/brand';
 import { useToast } from '../context/ToastContext';
+import { TermsConsent } from '../components/common/TermsConsent';
 
 export const CheckoutPage: React.FC = () => {
   const { items, subtotal, discountAmount, shippingFee, total, clearCart } = useCart();
@@ -24,6 +25,8 @@ export const CheckoutPage: React.FC = () => {
     deliveryMethod: 'standard'
   });
 
+  const [termsAccepted, setTermsAccepted] = useState(false);
+  const [termsError, setTermsError] = useState('');
   const [isOrdered, setIsOrdered] = useState(false);
   const [orderId, setOrderId] = useState('');
 
@@ -31,6 +34,12 @@ export const CheckoutPage: React.FC = () => {
     e.preventDefault();
     if (!formData.fullName || !formData.phone || !formData.address) {
       addToast('Missing Details', 'Please complete your shipping address details', 'error');
+      return;
+    }
+
+    if (!termsAccepted) {
+      setTermsError('Please agree to the Terms & Conditions and Privacy Policy');
+      addToast('Terms Agreement Required', 'You must review and accept our Terms & Conditions to place an order.', 'error');
       return;
     }
 
@@ -187,7 +196,7 @@ export const CheckoutPage: React.FC = () => {
                     value={formData.fullName}
                     onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                     placeholder="e.g. Ananya Raman"
-                    className="w-full bg-white/5 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-[#ff2a85]"
+                    className="w-full bg-white/5 border border-white/15 rounded-xl px-3.5 py-2.5 text-base sm:text-sm text-white focus:outline-none focus:border-[#ff2a85]"
                   />
                 </div>
                 <div>
@@ -198,7 +207,7 @@ export const CheckoutPage: React.FC = () => {
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     placeholder="e.g. 98653 66447"
-                    className="w-full bg-white/5 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-[#ff2a85]"
+                    className="w-full bg-white/5 border border-white/15 rounded-xl px-3.5 py-2.5 text-base sm:text-sm text-white focus:outline-none focus:border-[#ff2a85]"
                   />
                 </div>
               </div>
@@ -210,7 +219,7 @@ export const CheckoutPage: React.FC = () => {
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   placeholder="e.g. ananya@gmail.com"
-                  className="w-full bg-white/5 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-[#ff2a85]"
+                  className="w-full bg-white/5 border border-white/15 rounded-xl px-3.5 py-2.5 text-base sm:text-sm text-white focus:outline-none focus:border-[#ff2a85]"
                 />
               </div>
 
@@ -222,7 +231,7 @@ export const CheckoutPage: React.FC = () => {
                   value={formData.address}
                   onChange={(e) => setFormData({ ...formData, address: e.target.value })}
                   placeholder="e.g. 14/B, Gokulam Apartments, Fairlands"
-                  className="w-full bg-white/5 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-[#ff2a85]"
+                  className="w-full bg-white/5 border border-white/15 rounded-xl px-3.5 py-2.5 text-base sm:text-sm text-white focus:outline-none focus:border-[#ff2a85]"
                 />
               </div>
 
@@ -235,7 +244,7 @@ export const CheckoutPage: React.FC = () => {
                     value={formData.city}
                     onChange={(e) => setFormData({ ...formData, city: e.target.value })}
                     placeholder="Salem / Chennai"
-                    className="w-full bg-white/5 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-[#ff2a85]"
+                    className="w-full bg-white/5 border border-white/15 rounded-xl px-3.5 py-2.5 text-base sm:text-sm text-white focus:outline-none focus:border-[#ff2a85]"
                   />
                 </div>
                 <div>
@@ -246,7 +255,7 @@ export const CheckoutPage: React.FC = () => {
                     value={formData.state}
                     onChange={(e) => setFormData({ ...formData, state: e.target.value })}
                     placeholder="Tamil Nadu"
-                    className="w-full bg-white/5 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-[#ff2a85]"
+                    className="w-full bg-white/5 border border-white/15 rounded-xl px-3.5 py-2.5 text-base sm:text-sm text-white focus:outline-none focus:border-[#ff2a85]"
                   />
                 </div>
                 <div className="col-span-2 sm:col-span-1">
@@ -257,7 +266,7 @@ export const CheckoutPage: React.FC = () => {
                     value={formData.pincode}
                     onChange={(e) => setFormData({ ...formData, pincode: e.target.value })}
                     placeholder="636005"
-                    className="w-full bg-white/5 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-[#ff2a85]"
+                    className="w-full bg-white/5 border border-white/15 rounded-xl px-3.5 py-2.5 text-base sm:text-sm text-white focus:outline-none focus:border-[#ff2a85]"
                   />
                 </div>
               </div>
@@ -374,8 +383,20 @@ export const CheckoutPage: React.FC = () => {
               </div>
             </div>
 
-            {/* Submit Button */}
+            {/* Terms and Conditions Consent */}
             <div className="pt-2">
+              <TermsConsent
+                checked={termsAccepted}
+                onChange={(val) => {
+                  setTermsAccepted(val);
+                  if (termsError) setTermsError('');
+                }}
+                error={termsError}
+              />
+            </div>
+
+            {/* Submit Button */}
+            <div className="pt-1">
               <button
                 type="submit"
                 className="w-full py-4 rounded-xl bg-[#ff2a85] hover:bg-[#ff4396] text-white text-xs uppercase tracking-[0.2em] font-semibold transition-all shadow-xl shadow-[#ff2a85]/30 flex items-center justify-center gap-2"

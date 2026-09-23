@@ -5,7 +5,7 @@ import { BRAND_CONFIG } from '../../data/brand';
 
 export const SalemAtelierBanner: React.FC = () => {
   return (
-    <section className="py-16 bg-[#09090d] border-t border-white/5">
+    <section className="py-10 sm:py-14 bg-[#09090d] border-t border-white/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Card 1: Salem Boutique */}

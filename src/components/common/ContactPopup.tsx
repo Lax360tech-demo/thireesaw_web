@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { X, Send, CheckCircle2, Phone, MessageSquare } from 'lucide-react';
-import { BRAND_INFO } from '../../data/products';
-import { BRAND } from '../../data/brand';
+import { X, Send, CheckCircle2, MessageSquare } from 'lucide-react';
+import { TermsConsent } from './TermsConsent';
 
 const STORAGE_SESSION_KEY = 'thireeshaw_contact_popup_shown';
 const ENQUIRIES_STORAGE_KEY = 'thireeshaw_enquiries';
@@ -16,6 +15,7 @@ export const ContactPopup: React.FC = () => {
     service: 'Bespoke Bridal Blouse',
     message: ''
   });
+  const [termsAccepted, setTermsAccepted] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -29,6 +29,17 @@ export const ContactPopup: React.FC = () => {
       return () => clearTimeout(timer);
     }
   }, []);
+
+  // Lock background body scroll when open
+  useEffect(() => {
+    if (isOpen) {
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = originalOverflow;
+      };
+    }
+  }, [isOpen]);
 
   const handleClose = () => {
     sessionStorage.setItem(STORAGE_SESSION_KEY, 'true');
@@ -45,6 +56,9 @@ export const ContactPopup: React.FC = () => {
     }
     if (!formData.message.trim()) {
       errs.message = 'Please let us know what you would like to design';
+    }
+    if (!termsAccepted) {
+      errs.terms = 'Please accept the Terms & Conditions and Privacy Policy';
     }
     setErrors(errs);
     return Object.keys(errs).length === 0;
@@ -65,6 +79,7 @@ export const ContactPopup: React.FC = () => {
         service: formData.service,
         message: formData.message.trim(),
         source: 'First-Visit Welcome Popup',
+        termsAccepted: true,
         status: 'New',
         createdAt: new Date().toISOString()
       };
@@ -93,13 +108,19 @@ export const ContactPopup: React.FC = () => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md transition-opacity duration-300 animate-fadeIn">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="contact-popup-title"
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center sm:p-4 bg-black/80 backdrop-blur-md transition-opacity duration-300 animate-fadeIn"
+    >
       {/* Click outside backdrop */}
       <div className="absolute inset-0" onClick={handleClose} />
 
-      <div className="relative w-full max-w-lg bg-[#0d0d12] border border-white/15 rounded-2xl shadow-[0_25px_60px_rgba(0,0,0,0.8)] overflow-hidden z-10 transition-transform duration-300">
+      {/* Modal / Mobile Bottom Sheet Card */}
+      <div className="relative w-full max-w-lg max-h-[92dvh] sm:max-h-[90vh] flex flex-col bg-[#0d0d12] border-t sm:border border-white/15 rounded-t-3xl sm:rounded-2xl shadow-[0_25px_60px_rgba(0,0,0,0.8)] overflow-hidden z-10 transition-transform duration-300">
         {/* Top ambient luxury accent bar */}
-        <div className="h-1.5 w-full bg-gradient-to-r from-[#ff2a85] via-[#fbbf24] to-[#ff2a85]" />
+        <div className="h-1.5 w-full bg-gradient-to-r from-[#ff2a85] via-[#fbbf24] to-[#ff2a85] shrink-0" />
 
         {/* Close Button */}
         <button
@@ -111,7 +132,7 @@ export const ContactPopup: React.FC = () => {
         </button>
 
         {submitted ? (
-          <div className="p-8 sm:p-10 text-center space-y-4">
+          <div className="p-8 sm:p-10 text-center space-y-4 my-auto">
             <div className="w-16 h-16 rounded-full bg-[#fbbf24]/10 border border-[#fbbf24]/30 text-[#fbbf24] mx-auto flex items-center justify-center">
               <CheckCircle2 className="w-9 h-9" />
             </div>
@@ -126,22 +147,22 @@ export const ContactPopup: React.FC = () => {
             </div>
           </div>
         ) : (
-          <div className="p-6 sm:p-8">
+          <div className="flex-1 overflow-y-auto overscroll-contain p-5 sm:p-8 space-y-4 pb-[calc(1.5rem+env(safe-area-inset-bottom,0px))]">
             {/* Header branding */}
-            <div className="text-center mb-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#ff2a85]/10 border border-[#ff2a85]/30 text-[11px] font-semibold text-[#ff62a6] tracking-widest uppercase mb-2.5">
+            <div className="text-center mb-4 pr-6 sm:pr-0">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#ff2a85]/10 border border-[#ff2a85]/30 text-[11px] font-semibold text-[#ff62a6] tracking-widest uppercase mb-2">
                 <span>BESPOKE BRIDAL & EMBROIDERY</span>
               </div>
-              <h2 className="font-serif text-2xl sm:text-3xl font-bold text-white tracking-wide">
+              <h2 id="contact-popup-title" className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-white tracking-wide">
                 LET'S CREATE SOMETHING BEAUTIFUL
               </h2>
               <p className="text-gray-300 text-xs sm:text-sm mt-1.5 font-light">
-                Have a custom blouse, bridal styling or boutique enquiry? Share your details and we'll craft your vision.
+                Have a custom blouse, bridal styling or boutique enquiry? Share your details and our Salem atelier will craft your vision.
               </p>
             </div>
 
             {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-3.5">
               <div>
                 <label className="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-1">
                   Full Name <span className="text-[#ff2a85]">*</span>
@@ -154,9 +175,9 @@ export const ContactPopup: React.FC = () => {
                     setFormData({ ...formData, name: e.target.value });
                     if (errors.name) setErrors({ ...errors, name: '' });
                   }}
-                  className={`w-full px-3.5 py-2.5 rounded-lg bg-white/5 border ${
+                  className={`w-full max-w-full box-border px-3.5 py-2.5 rounded-lg bg-white/5 border ${
                     errors.name ? 'border-red-500' : 'border-white/10 focus:border-[#fbbf24]'
-                  } text-white placeholder-gray-500 text-sm outline-none transition-colors`}
+                  } text-white placeholder-gray-500 text-base sm:text-sm outline-none transition-colors`}
                 />
                 {errors.name && <p className="text-red-400 text-[11px] mt-1">{errors.name}</p>}
               </div>
@@ -174,9 +195,9 @@ export const ContactPopup: React.FC = () => {
                       setFormData({ ...formData, phone: e.target.value });
                       if (errors.phone) setErrors({ ...errors, phone: '' });
                     }}
-                    className={`w-full px-3.5 py-2.5 rounded-lg bg-white/5 border ${
+                    className={`w-full max-w-full box-border px-3.5 py-2.5 rounded-lg bg-white/5 border ${
                       errors.phone ? 'border-red-500' : 'border-white/10 focus:border-[#fbbf24]'
-                    } text-white placeholder-gray-500 text-sm outline-none transition-colors`}
+                    } text-white placeholder-gray-500 text-base sm:text-sm outline-none transition-colors`}
                   />
                   {errors.phone && <p className="text-red-400 text-[11px] mt-1">{errors.phone}</p>}
                 </div>
@@ -190,7 +211,7 @@ export const ContactPopup: React.FC = () => {
                     placeholder="name@email.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-lg bg-white/5 border border-white/10 focus:border-[#fbbf24] text-white placeholder-gray-500 text-sm outline-none transition-colors"
+                    className="w-full max-w-full box-border px-3.5 py-2.5 rounded-lg bg-white/5 border border-white/10 focus:border-[#fbbf24] text-white placeholder-gray-500 text-base sm:text-sm outline-none transition-colors"
                   />
                 </div>
               </div>
@@ -202,12 +223,13 @@ export const ContactPopup: React.FC = () => {
                 <select
                   value={formData.service}
                   onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                  className="w-full px-3.5 py-2.5 rounded-lg bg-[#14141c] border border-white/10 focus:border-[#fbbf24] text-white text-sm outline-none transition-colors cursor-pointer"
+                  className="w-full max-w-full box-border px-3.5 py-2.5 rounded-lg bg-[#14141c] border border-white/10 focus:border-[#fbbf24] text-white text-base sm:text-sm outline-none transition-colors cursor-pointer"
                 >
                   <option value="Bespoke Bridal Blouse">Bespoke Bridal Blouse (Hand Zardosi / Aari)</option>
                   <option value="Pattu Blouse Embroidery">Pattu Blouse Embroidery Work</option>
                   <option value="Pure Silk Saree Consultation">Pure Silk Saree Inquiry</option>
                   <option value="Designer Salwar / Gagra">Designer Salwar / Wedding Gagra</option>
+                  <option value="Temple & Bridal Jewellery">Temple & Bridal Jewellery</option>
                   <option value="Worldwide Courier / Bulk Orders">Worldwide Courier / International Dispatch</option>
                 </select>
               </div>
@@ -224,19 +246,34 @@ export const ContactPopup: React.FC = () => {
                     setFormData({ ...formData, message: e.target.value });
                     if (errors.message) setErrors({ ...errors, message: '' });
                   }}
-                  className={`w-full px-3.5 py-2 rounded-lg bg-white/5 border ${
+                  className={`w-full max-w-full box-border px-3.5 py-2 rounded-lg bg-white/5 border ${
                     errors.message ? 'border-red-500' : 'border-white/10 focus:border-[#fbbf24]'
-                  } text-white placeholder-gray-500 text-sm outline-none transition-colors resize-none`}
+                  } text-white placeholder-gray-500 text-base sm:text-sm outline-none transition-colors resize-none`}
                 />
                 {errors.message && <p className="text-red-400 text-[11px] mt-1">{errors.message}</p>}
               </div>
+
+              {/* Terms & Conditions Consent */}
+              <TermsConsent
+                checked={termsAccepted}
+                onChange={(val) => {
+                  setTermsAccepted(val);
+                  if (errors.terms) {
+                    const newErrs = { ...errors };
+                    delete newErrs.terms;
+                    setErrors(newErrs);
+                  }
+                }}
+                error={errors.terms}
+                compact
+              />
 
               {/* Submit Buttons */}
               <div className="pt-2 space-y-2.5">
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-[#ff2a85] to-[#ff4797] hover:brightness-110 text-white text-sm font-semibold tracking-wider uppercase transition-all shadow-[0_4px_15px_rgba(255,42,133,0.35)] flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
+                  className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-[#ff2a85] to-[#ff4797] hover:brightness-110 text-white text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all shadow-[0_4px_15px_rgba(255,42,133,0.35)] flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
                 >
                   <Send className="w-4 h-4" />
                   <span>{isSubmitting ? 'SENDING ENQUIRY...' : 'SUBMIT ENQUIRY'}</span>
@@ -248,7 +285,7 @@ export const ContactPopup: React.FC = () => {
                     onClick={handleClose}
                     className="text-gray-400 hover:text-white underline underline-offset-4 transition-colors"
                   >
-                    Continue browsing collections
+                    Continue browsing
                   </button>
                   <a
                     href={`https://wa.me/919865366447?text=${encodeURIComponent(

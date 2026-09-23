@@ -7,7 +7,6 @@ import { Navbar } from './components/common/Navbar';
 import { MobileMenu } from './components/common/MobileMenu';
 import { MobileBottomNav } from './components/common/MobileBottomNav';
 import { Footer } from './components/common/Footer';
-import { SearchModal } from './components/search/SearchModal';
 import { CartDrawer } from './components/cart/CartDrawer';
 import { ContactPopup } from './components/common/ContactPopup';
 import { FloatingWhatsApp } from './components/common/FloatingWhatsApp';
@@ -44,7 +43,6 @@ const ScrollToTop: React.FC = () => {
 };
 
 const AppLayout: React.FC = () => {
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { pathname } = useLocation();
 
@@ -74,7 +72,6 @@ const AppLayout: React.FC = () => {
 
       {/* Global Luxury Sticky Navigation */}
       <Navbar
-        onOpenSearch={() => setIsSearchOpen(true)}
         onOpenMobileMenu={() => setIsMobileMenuOpen(true)}
       />
 
@@ -82,12 +79,6 @@ const AppLayout: React.FC = () => {
       <MobileMenu
         isOpen={isMobileMenuOpen}
         onClose={() => setIsMobileMenuOpen(false)}
-      />
-
-      {/* Interactive Overlays */}
-      <SearchModal
-        isOpen={isSearchOpen}
-        onClose={() => setIsSearchOpen(false)}
       />
 
       <CartDrawer />

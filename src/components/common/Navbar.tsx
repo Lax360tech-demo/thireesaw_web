@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Search, Heart, ShoppingBag, Menu } from 'lucide-react';
+import { Heart, ShoppingBag, Menu } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 import { useWishlist } from '../../context/WishlistContext';
 import { BRAND_CONFIG } from '../../data/brand';
 
 interface NavbarProps {
-  onOpenSearch: () => void;
   onOpenMobileMenu: () => void;
 }
 
@@ -24,7 +23,7 @@ const NAV_LINKS = [
   { name: 'CONTACT', path: '/contact' }
 ];
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch, onOpenMobileMenu }) => {
+export const Navbar: React.FC<NavbarProps> = ({ onOpenMobileMenu }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const { openCart, itemCount } = useCart();
   const { wishlistCount } = useWishlist();
@@ -117,17 +116,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch, onOpenMobileMenu }
             })}
           </nav>
 
-          {/* Right Action Icons: Search, Wishlist, Cart */}
+          {/* Right Action Icons: Wishlist, Cart */}
           <div className="flex items-center gap-1 sm:gap-2 shrink-0">
-            {/* Search */}
-            <button
-              onClick={onOpenSearch}
-              className="btn-press p-2 text-gray-300 hover:text-white rounded-lg hover:bg-white/10 transition-colors cursor-pointer"
-              aria-label="Open search"
-            >
-              <Search className="w-5 h-5" />
-            </button>
-
             {/* Wishlist */}
             <Link
               to="/wishlist"

@@ -8,13 +8,15 @@ interface ProductGridProps {
   onQuickView?: (product: Product) => void;
   onResetFilters?: () => void;
   isLoading?: boolean;
+  isSearchActive?: boolean;
 }
 
 export const ProductGrid: React.FC<ProductGridProps> = ({
   products,
   onQuickView,
   onResetFilters,
-  isLoading = false
+  isLoading = false,
+  isSearchActive = false
 }) => {
   if (isLoading) {
     return (
@@ -34,20 +36,24 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
   if (products.length === 0) {
     return (
       <div className="py-20 px-4 text-center border border-dashed border-white/10 rounded-2xl bg-white/[0.02]">
-        <div className="w-14 h-14 mx-auto rounded-full bg-[#ff2a85]/10 border border-[#ff2a85]/20 flex items-center justify-center text-[#ff62a6] mb-4">
+        <div className="w-14 h-14 mx-auto rounded-full bg-[#fbbf24]/10 border border-[#fbbf24]/20 flex items-center justify-center text-[#fbbf24] mb-4">
           <PackageSearch className="w-6 h-6" />
         </div>
-        <h3 className="font-serif text-2xl text-white mb-2">No Matching Creations Found</h3>
+        <h3 className="font-serif text-2xl text-white mb-2">
+          {isSearchActive ? 'No pieces found' : 'No Matching Creations Found'}
+        </h3>
         <p className="text-sm text-gray-400 max-w-md mx-auto mb-6">
-          We couldn&apos;t find any items matching your selected criteria. Try adjusting your filters or price range.
+          {isSearchActive
+            ? 'Try another search or explore our collections.'
+            : "We couldn't find any items matching your selected criteria. Try adjusting your filters or price range."}
         </p>
         {onResetFilters && (
           <button
             onClick={onResetFilters}
-            className="btn-press inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/10 hover:bg-[#ff2a85] text-white text-xs uppercase tracking-widest font-semibold transition-colors cursor-pointer"
+            className="btn-press inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/10 hover:bg-[#ff2a85] text-white text-xs uppercase tracking-widest font-semibold transition-all cursor-pointer shadow-lg hover:shadow-[#ff2a85]/30"
           >
             <RotateCcw className="w-3.5 h-3.5" />
-            <span>Reset All Filters</span>
+            <span>{isSearchActive ? 'VIEW ALL COLLECTIONS' : 'Reset All Filters'}</span>
           </button>
         )}
       </div>

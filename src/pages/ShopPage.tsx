@@ -1,14 +1,15 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { SlidersHorizontal, X } from 'lucide-react';
+import { SlidersHorizontal, X, Search } from 'lucide-react';
 import { ProductFilters } from '../components/shop/ProductFilters';
 import { ProductGrid } from '../components/shop/ProductGrid';
 import { SortDropdown } from '../components/shop/SortDropdown';
 import { QuickViewModal } from '../components/modals/QuickViewModal';
-import { PRODUCTS } from '../data/products';
+import { getActiveProducts } from '../data/products';
 import { FilterState, Product } from '../types';
 
 export const ShopPage: React.FC = () => {
+  const [allProducts, setAllProducts] = useState<Product[]>(() => getActiveProducts());
   const [searchParams, setSearchParams] = useSearchParams();
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
@@ -27,12 +28,25 @@ export const ShopPage: React.FC = () => {
     sortBy: 'featured'
   });
 
+  // Listen to product updates (e.g. from admin panel or storage)
+  useEffect(() => {
+    const handleProductsChange = () => {
+      setAllProducts(getActiveProducts());
+    };
+    window.addEventListener('storage', handleProductsChange);
+    window.addEventListener('products-updated', handleProductsChange);
+    return () => {
+      window.removeEventListener('storage', handleProductsChange);
+      window.removeEventListener('products-updated', handleProductsChange);
+    };
+  }, []);
+
   // Keep search params in sync if url params change
   useEffect(() => {
     const cat = searchParams.get('category');
     const col = searchParams.get('collection');
     const q = searchParams.get('search');
-    if (cat || col || q) {
+    if (cat || col || q !== null) {
       setFilters((prev) => ({
         ...prev,
         category: cat || prev.category,
@@ -41,6 +55,20 @@ export const ShopPage: React.FC = () => {
       }));
     }
   }, [searchParams]);
+
+  const handleSearchChange = (val: string) => {
+    setFilters((prev) => ({
+      ...prev,
+      searchQuery: val
+    }));
+    const newParams = new URLSearchParams(searchParams);
+    if (val.trim()) {
+      newParams.set('search', val);
+    } else {
+      newParams.delete('search');
+    }
+    setSearchParams(newParams, { replace: true });
+  };
 
   const handleResetFilters = () => {
     setFilters({
@@ -52,12 +80,12 @@ export const ShopPage: React.FC = () => {
       searchQuery: '',
       sortBy: 'featured'
     });
-    setSearchParams({});
+    setSearchParams({}, { replace: true });
   };
 
   // Filter & Sort Logic
   const filteredProducts = useMemo(() => {
-    return PRODUCTS.filter((product) => {
+    return allProducts.filter((product) => {
       // Category filter
       if (filters.category !== 'all') {
         if (filters.category === 'bridal') {
@@ -96,16 +124,38 @@ export const ShopPage: React.FC = () => {
         return false;
       }
 
-      // Search query
+      // Search query across names, categories, descriptions, fabrics, crafts, and tags
       if (filters.searchQuery.trim()) {
         const q = filters.searchQuery.toLowerCase().trim();
-        const matchesQuery =
-          product.name.toLowerCase().includes(q) ||
-          product.category.toLowerCase().includes(q) ||
-          product.subcategory.toLowerCase().includes(q) ||
-          product.craftType.toLowerCase().includes(q) ||
-          product.material.toLowerCase().includes(q);
-        if (!matchesQuery) return false;
+        const searchWords = q.split(/\s+/).filter(Boolean);
+
+        // Special semantic keywords
+        const isBridalTerm = q.includes('bridal');
+        const isCustomBlouseTerm = (q.includes('custom') && q.includes('blouse')) || q === 'custom' || q === 'custom blouse';
+        const isJewelleryTerm = q.includes('jewel') || q.includes('necklace') || q.includes('haram') || q.includes('jhumka') || q.includes('bangle');
+
+        const searchableText = [
+          product.name,
+          product.category,
+          product.subcategory,
+          product.craftType,
+          product.material,
+          product.occasion,
+          product.description || '',
+          product.shortDescription || '',
+          ...(product.colors ? product.colors.map((c) => c.name) : []),
+          ...(product.details || [])
+        ].join(' ').toLowerCase();
+
+        // Either all search words match in searchable text, or special semantic terms match
+        const allWordsMatch = searchWords.every((word) => searchableText.includes(word));
+        const bridalMatch = isBridalTerm && (product.isBridal || product.category === 'bridal');
+        const customBlouseMatch = isCustomBlouseTerm && (product.category === 'blouses' || searchableText.includes('custom'));
+        const jewelleryMatch = isJewelleryTerm && product.category === 'jewellery';
+
+        if (!allWordsMatch && !bridalMatch && !customBlouseMatch && !jewelleryMatch) {
+          return false;
+        }
       }
 
       return true;
@@ -115,7 +165,7 @@ export const ShopPage: React.FC = () => {
       if (filters.sortBy === 'price-high') return b.price - a.price;
       return (b.isFeatured ? 1 : 0) - (a.isFeatured ? 1 : 0); // default 'featured'
     });
-  }, [filters]);
+  }, [allProducts, filters]);
 
   // Active filter chips
   const activeChips = [
@@ -144,9 +194,61 @@ export const ShopPage: React.FC = () => {
                 Explore handloom sarees, customized bridal blouses, flared anarkalis, and handcrafted royal wedding gagras.
               </p>
             </div>
-            <div className="text-xs sm:text-sm text-gray-400">
-              Showing <strong className="text-white">{filteredProducts.length}</strong> creations
+            <div className="text-xs sm:text-sm text-gray-400 shrink-0">
+              {filters.searchQuery.trim() ? (
+                <span>
+                  <strong className="text-white">{filteredProducts.length}</strong>{' '}
+                  {filteredProducts.length === 1 ? 'piece found' : 'pieces found'}
+                </span>
+              ) : (
+                <span>
+                  Showing <strong className="text-white">{filteredProducts.length}</strong> creations
+                </span>
+              )}
             </div>
+          </div>
+
+          {/* Premium Shop Search Bar */}
+          <div className="mt-8 w-full max-w-3xl">
+            <div className="relative flex items-center w-full rounded-xl bg-[#0f0f15]/90 border border-white/15 hover:border-white/25 focus-within:border-[#fbbf24]/70 focus-within:ring-1 focus-within:ring-[#fbbf24]/30 shadow-lg shadow-black/40 transition-all duration-200">
+              <div className="absolute left-4 flex items-center pointer-events-none text-gray-400">
+                <Search className="w-4 h-4 sm:w-5 sm:h-5 text-[#fbbf24]" />
+              </div>
+              <input
+                type="text"
+                value={filters.searchQuery}
+                onChange={(e) => handleSearchChange(e.target.value)}
+                placeholder="Search products, collections, styles..."
+                className="w-full pl-11 sm:pl-12 pr-10 py-3 sm:py-3.5 bg-transparent text-sm sm:text-base text-white placeholder-gray-400 font-sans tracking-wide rounded-xl focus:outline-none"
+              />
+              {filters.searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => handleSearchChange('')}
+                  className="absolute right-3.5 p-1 rounded-lg text-gray-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                  aria-label="Clear search"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              )}
+            </div>
+
+            {/* Live Search Status Feedback */}
+            {filters.searchQuery.trim() && (
+              <div className="flex items-center justify-between text-xs text-gray-400 mt-2.5 px-1">
+                <span>
+                  <strong className="text-[#fbbf24]">{filteredProducts.length}</strong>{' '}
+                  {filteredProducts.length === 1 ? 'piece' : 'pieces'} found for &ldquo;<span className="text-white font-medium">{filters.searchQuery}</span>&rdquo;
+                </span>
+                <button
+                  type="button"
+                  onClick={() => handleSearchChange('')}
+                  className="text-xs text-[#ff62a6] hover:underline cursor-pointer"
+                >
+                  Clear search
+                </button>
+              </div>
+            )}
           </div>
         </div>
 
@@ -155,7 +257,7 @@ export const ShopPage: React.FC = () => {
           {/* Mobile Filter Button */}
           <button
             onClick={() => setIsMobileFilterOpen(true)}
-            className="lg:hidden flex items-center gap-2 px-4 py-2 bg-[#121217] border border-white/10 rounded-xl text-xs font-medium text-white hover:bg-white/10 transition-colors"
+            className="lg:hidden flex items-center gap-2 px-4 py-2 bg-[#121217] border border-white/10 rounded-xl text-xs font-medium text-white hover:bg-white/10 transition-colors cursor-pointer"
           >
             <SlidersHorizontal className="w-4 h-4 text-[#ff2a85]" />
             <span>Filters</span>
@@ -175,8 +277,14 @@ export const ShopPage: React.FC = () => {
               >
                 <span>{chip.label}</span>
                 <button
-                  onClick={() => setFilters({ ...filters, [chip.key]: chip.key === 'searchQuery' ? '' : 'all' })}
-                  className="hover:text-white"
+                  onClick={() => {
+                    if (chip.key === 'searchQuery') {
+                      handleSearchChange('');
+                    } else {
+                      setFilters({ ...filters, [chip.key]: 'all' });
+                    }
+                  }}
+                  className="hover:text-white cursor-pointer"
                 >
                   <X className="w-3 h-3" />
                 </button>
@@ -185,7 +293,7 @@ export const ShopPage: React.FC = () => {
             {activeChips.length > 0 && (
               <button
                 onClick={handleResetFilters}
-                className="text-xs text-[#fbbf24] hover:underline ml-2"
+                className="text-xs text-[#fbbf24] hover:underline ml-2 cursor-pointer"
               >
                 Clear all
               </button>
@@ -218,6 +326,7 @@ export const ShopPage: React.FC = () => {
               products={filteredProducts}
               onQuickView={(p) => setQuickViewProduct(p)}
               onResetFilters={handleResetFilters}
+              isSearchActive={Boolean(filters.searchQuery.trim())}
             />
           </main>
         </div>

@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, useMemo, useCallback } from 'react';
 import { CartItem, Product } from '../types';
-import { PRODUCTS } from '../data/products';
+import { getActiveProducts } from '../data/products';
 import { useToast } from './ToastContext';
 
 interface PromoCode {
@@ -45,29 +45,71 @@ const FREE_SHIPPING_THRESHOLD = 5000;
 const STANDARD_SHIPPING_FEE = 250;
 
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [allProducts, setAllProducts] = useState<Product[]>(() => getActiveProducts());
+
   const [items, setItems] = useState<CartItem[]>(() => {
     try {
+      const active = getActiveProducts();
+      const validProductIds = new Set(active.map((p) => p.id));
       const saved = localStorage.getItem(CART_STORAGE_KEY);
-      if (saved) return JSON.parse(saved);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          return parsed.filter(
+            (item: CartItem) =>
+              item &&
+              item.product &&
+              item.product.id &&
+              validProductIds.has(item.product.id) &&
+              typeof item.quantity === 'number' &&
+              item.quantity > 0
+          );
+        }
+      }
     } catch (e) {
       console.error('Failed to parse cart storage', e);
     }
-    // Default initial luxury item for instant interactive preview
-    const sampleProduct = PRODUCTS.find((p) => p.id === 'td-bls-01') || PRODUCTS[0];
-    return [
-      {
-        id: `${sampleProduct.id}-38-${sampleProduct.colors[0]?.name || 'default'}`,
-        product: sampleProduct,
-        selectedSize: sampleProduct.sizes[1] || sampleProduct.sizes[0] || 'Standard',
-        selectedColor: sampleProduct.colors[0]?.name || 'Classic',
-        quantity: 1
-      }
-    ];
+    return []; // Start empty by default
   });
 
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [appliedPromo, setAppliedPromo] = useState<PromoCode | null>(null);
   const { addToast } = useToast();
+
+  // Listen to product updates (e.g. from admin panel or storage)
+  useEffect(() => {
+    const handleProductsChange = () => {
+      setAllProducts(getActiveProducts());
+    };
+    window.addEventListener('storage', handleProductsChange);
+    window.addEventListener('products-updated', handleProductsChange);
+    return () => {
+      window.removeEventListener('storage', handleProductsChange);
+      window.removeEventListener('products-updated', handleProductsChange);
+    };
+  }, []);
+
+  // Auto-prune any cart items that no longer exist or are corrupted
+  useEffect(() => {
+    const validProductIds = new Set(allProducts.map((p) => p.id));
+    const sanitized = items.filter(
+      (item) =>
+        item &&
+        item.product &&
+        item.product.id &&
+        validProductIds.has(item.product.id) &&
+        typeof item.quantity === 'number' &&
+        item.quantity > 0
+    );
+    if (sanitized.length !== items.length) {
+      setItems(sanitized);
+      try {
+        localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(sanitized));
+      } catch (e) {
+        console.error('Could not save sanitized cart', e);
+      }
+    }
+  }, [allProducts, items]);
 
   useEffect(() => {
     try {
